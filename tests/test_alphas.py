@@ -15,11 +15,12 @@ from validator import parse_alphas_from_readme, validate_alpha_expression, ALLOW
 README_PATH = os.path.join(os.path.dirname(__file__), "..", "README.md")
 
 
-def test_readme_contains_minimum_twelve_alphas():
-    """Verify that the alpha pack contains at least 12 distinct alphas."""
+def test_readme_contains_minimum_twenty_alphas():
+    """Verify that the alpha pack contains at least 20 distinct alphas."""
     alphas = parse_alphas_from_readme(README_PATH)
-    assert len(alphas) >= 12, f"Expected at least 12 alphas, found {len(alphas)}"
+    assert len(alphas) >= 20, f"Expected at least 20 alphas, found {len(alphas)}"
     assert isinstance(alphas, list), "Alphas must be returned as a list"
+
 
 
 def test_all_alphas_have_balanced_parentheses():

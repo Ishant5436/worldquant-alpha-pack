@@ -9,12 +9,11 @@ Mathematical predictive expressions formatted for the WorldQuant BRAIN simulatio
 - **Correlation to existing fund models:** < 0.70
 
 ---
-
-## Alpha 1: Volatility-Normalized Mean Reversion on Liquidity Shock
+## Alpha 1: Volatility-Normalized Mean Reversion
 ```text
 -1 * rank(delta(close, 5) / (high - low + 0.0001)) * rank(volume / adv20)
 ```
-- **Hypothesis:** Stocks exhibiting extreme 5-day directional movement on elevated relative volume suffer short-term liquidity overshooting and revert to their rolling mean.
+- **Hypothesis:** Short-term extreme directional excursions revert on elevated liquidity volume.
 - **Simulation Settings:**
   - Region: `USA`
   - Universe: `TOP3000`
@@ -24,152 +23,336 @@ Mathematical predictive expressions formatted for the WorldQuant BRAIN simulatio
 
 ---
 
-## Alpha 2: Intraday VWAP Dislocation Reversal
+## Alpha 2: Volume-Gated Range Mean Reversion
+```text
+-1 * rank(ts_rank(close, 10)) * rank(volume / adv20)
+```
+- **Hypothesis:** Multi-day highs on high turnover signal exhaustion and subsequent reversion.
+- **Simulation Settings:**
+  - Region: `USA`
+  - Universe: `TOP3000`
+  - Neutralization: `Subindustry`
+  - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
+
+---
+
+## Alpha 3: VWAP Dislocation Mean Reversion
+```text
+-1 * rank(delta(vwap, 3)) * rank(ts_mean(volume, 5) / adv20)
+```
+- **Hypothesis:** Aggressive rapid benchmark pricing drift snaps back toward equilibrium.
+- **Simulation Settings:**
+  - Region: `USA`
+  - Universe: `TOP3000`
+  - Neutralization: `Subindustry`
+  - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
+
+---
+
+## Alpha 4: Intraday Close vs Open Fade
+```text
+-1 * rank(close - open) * rank(ts_rank(volume, 5))
+```
+- **Hypothesis:** Intraday trends supported by spike volume show next-day mean reversion.
+- **Simulation Settings:**
+  - Region: `USA`
+  - Universe: `TOP3000`
+  - Neutralization: `Subindustry`
+  - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
+
+---
+
+## Alpha 5: Short Horizon Decay Reversal
+```text
+-1 * rank(delta(close, 2)) * rank(ts_decay_linear(volume, 5))
+```
+- **Hypothesis:** Two-day sharp momentum decays rapidly under weighted volume confirmation.
+- **Simulation Settings:**
+  - Region: `USA`
+  - Universe: `TOP3000`
+  - Neutralization: `Subindustry`
+  - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
+
+---
+
+## Alpha 6: Decay Linear Acceleration
+```text
+rank(ts_decay_linear(delta(close, 5), 10)) * rank(adv20 / ts_mean(volume, 20))
+```
+- **Hypothesis:** Decaying smoothed multi-day returns signal persistent institutional accumulation.
+- **Simulation Settings:**
+  - Region: `USA`
+  - Universe: `TOP3000`
+  - Neutralization: `Subindustry`
+  - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
+
+---
+
+## Alpha 7: Price Volume Correlation Trend
+```text
+rank(ts_rank(close, 20)) * rank(ts_corr(close, volume, 10))
+```
+- **Hypothesis:** High percentile closing prices co-varying with volume establish strong trend regimes.
+- **Simulation Settings:**
+  - Region: `USA`
+  - Universe: `TOP3000`
+  - Neutralization: `Subindustry`
+  - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
+
+---
+
+## Alpha 8: Multi-Horizon Price Momentum
+```text
+rank(close - ts_delay(close, 10)) * rank(ts_decay_linear(volume, 10))
+```
+- **Hypothesis:** 10-day price momentum sustained by volume persistence exhibits continuation.
+- **Simulation Settings:**
+  - Region: `USA`
+  - Universe: `TOP3000`
+  - Neutralization: `Subindustry`
+  - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
+
+---
+
+## Alpha 9: Moving Average Gap Breakout
+```text
+rank(ts_mean(close, 5) - ts_mean(close, 20)) * rank(volume / adv20)
+```
+- **Hypothesis:** Short versus medium moving average divergence supported by volume.
+- **Simulation Settings:**
+  - Region: `USA`
+  - Universe: `TOP3000`
+  - Neutralization: `Subindustry`
+  - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
+
+---
+
+## Alpha 10: VWAP Trend with Return Volume Coupling
+```text
+rank(delta(vwap, 5)) * rank(ts_corr(returns, volume, 15))
+```
+- **Hypothesis:** 5-day VWAP upward movement correlated with volume yields alpha continuation.
+- **Simulation Settings:**
+  - Region: `USA`
+  - Universe: `TOP3000`
+  - Neutralization: `Subindustry`
+  - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
+
+---
+
+## Alpha 11: Intraday VWAP Dislocation Reversal
 ```text
 rank(ts_decay_linear(vwap - close, 5)) * rank(ts_rank(volume, 10))
 ```
-- **Hypothesis:** When closing price closes significantly below institutional VWAP accompanied by elevated multi-day volume rank, institutional accumulation creates upward pressure over the subsequent 5-day window.
-- **Simulation Settings:**
-  - Region: `USA`
-  - Universe: `TOP3000`
-  - Neutralization: `Industry`
-  - Truncation: `0.08`
-
----
-
-## Alpha 3: Subindustry-Neutral Momentum vs Volume Decay
-```text
-group_rank(ts_decay_linear(close / ts_delay(close, 20), 10), subindustry) - group_rank(ts_decay_linear(volume / ts_delay(volume, 20), 10), subindustry)
-```
-- **Hypothesis:** Momentum sustained on declining relative volume represents institutional accumulation, while momentum on surging volume represents retail distribution exhaustion.
-- **Simulation Settings:**
-  - Region: `USA`
-  - Universe: `TOP3000`
-  - Neutralization: `Subindustry`
-  - Truncation: `0.05`
-
----
-
-## Alpha 4: Standardized Return Residual Asymmetry
-```text
--1 * ts_rank((returns - ts_mean(returns, 10)) / (stddev(returns, 20) + 0.0001), 10) * (volume / adv20)
-```
-- **Hypothesis:** Standardized return shocks exceeding 2 standard deviations on above-average daily volume experience mean reversion as liquidity providers absorb the order imbalance.
-- **Simulation Settings:**
-  - Region: `USA`
-  - Universe: `TOP3000`
-  - Neutralization: `Market`
-  - Truncation: `0.08`
-
----
-
-## Alpha 5: Price-Volume Correlation Decoupling
-```text
-rank(ts_corr(close, volume, 10)) - rank(ts_decay_linear(returns, 5))
-```
-- **Hypothesis:** A breakdown between 10-day price-volume correlation and short-term trailing returns highlights regime transition preceding cross-sectional factor rotation.
+- **Hypothesis:** Closing prices lagging VWAP on elevated volume signal institutional accumulation.
 - **Simulation Settings:**
   - Region: `USA`
   - Universe: `TOP3000`
   - Neutralization: `Subindustry`
   - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
 
 ---
 
-## Alpha 6: Roll Spread Liquidity Discrepancy
+## Alpha 12: Price-Volume Correlation Divergence
 ```text
--1 * rank(ts_decay_linear(abs(close - ts_delay(close, 1)) / (volume / adv20 + 0.0001), 5))
+-1 * rank(ts_corr(close, volume, 10)) * rank(delta(close, 3))
 ```
-- **Hypothesis:** High price dislocation per unit volume relative to 20-day average signals temporary liquidity evaporation that mean-reverts over 5 days.
+- **Hypothesis:** Negative price-volume correlation indicates distribution during price run-ups.
 - **Simulation Settings:**
   - Region: `USA`
   - Universe: `TOP3000`
   - Neutralization: `Subindustry`
   - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
 
 ---
 
-## Alpha 7: Parkinson High-Low Volatility Shock Mean Reversion
+## Alpha 13: Liquidity Shock Impact
 ```text
--1 * rank((high - low) / (abs(close - open) + 0.0001)) * rank(returns)
+rank(volume / adv20) * rank(delta(close, 1) / (high - low + 0.001))
 ```
-- **Hypothesis:** When intraday range (high-low) expands dramatically relative to body (close-open) on positive return days, buying power is exhausted and sets up negative reversal.
+- **Hypothesis:** Elevated liquidity with efficient range expansion signals institutional participation.
 - **Simulation Settings:**
   - Region: `USA`
   - Universe: `TOP3000`
   - Neutralization: `Subindustry`
   - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
 
 ---
 
-## Alpha 8: Subindustry Momentum Acceleration Divergence
+## Alpha 14: Volatility Damped Drift
 ```text
-group_rank(delta(close, 5) - delta(close, 20) / 4, subindustry) - group_rank(returns, subindustry)
+-1 * rank(ts_stddev(returns, 10)) * rank(delta(close, 5))
 ```
-- **Hypothesis:** Accelerating short-term return differentials over longer trailing baselines identify strong institutional momentum accumulation before broader market awareness.
-- **Simulation Settings:**
-  - Region: `USA`
-  - Universe: `TOP3000`
-  - Neutralization: `Subindustry`
-  - Truncation: `0.05`
-
----
-
-## Alpha 9: Volume-Weighted Price Dislocation Mean Reversion
-```text
--1 * rank(vwap - close) * rank(adv20 / (volume + 0.0001))
-```
-- **Hypothesis:** Large discounts of closing price beneath VWAP on subdued trading volume indicate temporary liquidity vacuum rather than fundamental re-rating.
+- **Hypothesis:** High realized volatility penalizes continuation; lower volatility trends persist.
 - **Simulation Settings:**
   - Region: `USA`
   - Universe: `TOP3000`
   - Neutralization: `Subindustry`
   - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
 
 ---
 
-## Alpha 10: Multi-Scale Price-Volume Skewness Asymmetry
+## Alpha 15: Weighted Intraday Pressure
 ```text
-rank(ts_corr(returns, volume, 20)) - rank(ts_corr(returns, volume, 5))
+rank(ts_decay_linear(close - open, 3)) * rank(volume / ts_mean(volume, 10))
 ```
-- **Hypothesis:** Short-term divergence where 5-day return-volume correlation flips relative to 20-day baseline flags institutional rotation regimes.
-- **Simulation Settings:**
-  - Region: `USA`
-  - Universe: `TOP3000`
-  - Neutralization: `Industry`
-  - Truncation: `0.08`
-
----
-
-## Alpha 11: Decayed Residual Volatility Spread
-```text
--1 * group_rank(stddev(returns, 20) - stddev(returns, 5), subindustry) * sign(returns)
-```
-- **Hypothesis:** Compressing volatility following large return swings precedes continuation in the direction of the dominant institutional trend.
-- **Simulation Settings:**
-  - Region: `USA`
-  - Universe: `TOP3000`
-  - Neutralization: `Subindustry`
-  - Truncation: `0.05`
-
----
-
-## Alpha 12: Intraday Range Exhaustion Reversion
-```text
--1 * rank(ts_decay_linear(high - vwap, 5)) * rank(volume / adv20)
-```
-- **Hypothesis:** Extended high-to-VWAP stretch accompanied by heavy trading volume signals upward buying exhaustion and institutional profit-taking.
+- **Hypothesis:** Cumulative intraday bar pressure predicts near-term performance.
 - **Simulation Settings:**
   - Region: `USA`
   - Universe: `TOP3000`
   - Neutralization: `Subindustry`
   - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
 
 ---
 
-## How to Submit
-1. Create a free account at [survey.worldquantbrain.com](https://survey.worldquantbrain.com/).
-2. Open the **Simulation** window.
-3. Paste each formula, select settings, and click **Simulate**.
-4. When simulation passes Sharpe > 1.25, click **Submit Alpha**.
-5. Accumulating points unlocks **Research Consultant** tier with quarterly stipends ($2,000 to $8,000/quarter).
+## Alpha 16: Dispersion Normalized Trend Fade
+```text
+-1 * rank(ts_stddev(close, 20) / ts_mean(close, 20)) * rank(delta(close, 5))
+```
+- **Hypothesis:** High relative dispersion over 20 days anticipates trend exhaustion.
+- **Simulation Settings:**
+  - Region: `USA`
+  - Universe: `TOP3000`
+  - Neutralization: `Subindustry`
+  - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
+
+---
+
+## Alpha 17: True Range Expansion with Volume
+```text
+rank(ts_rank(high - low, 10)) * rank(delta(volume, 3))
+```
+- **Hypothesis:** Expanding high-low range on surging volume precedes breakout continuation.
+- **Simulation Settings:**
+  - Region: `USA`
+  - Universe: `TOP3000`
+  - Neutralization: `Subindustry`
+  - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
+
+---
+
+## Alpha 18: Range Contraction Reversal
+```text
+-1 * rank(delta(high - low, 5)) * rank(ts_corr(close, vwap, 10))
+```
+- **Hypothesis:** Sharp volatility contraction with VWAP alignment predicts impending reversal.
+- **Simulation Settings:**
+  - Region: `USA`
+  - Universe: `TOP3000`
+  - Neutralization: `Subindustry`
+  - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
+
+---
+
+## Alpha 19: Volume Volatility Premium
+```text
+rank(ts_decay_linear(returns, 5)) * rank(ts_stddev(volume, 10) / adv20)
+```
+- **Hypothesis:** Return momentum amplified by volume volatility premium.
+- **Simulation Settings:**
+  - Region: `USA`
+  - Universe: `TOP3000`
+  - Neutralization: `Subindustry`
+  - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
+
+---
+
+## Alpha 20: Upper Range Exhaustion
+```text
+-1 * rank(ts_max(high, 10) - close) * rank(ts_rank(volume, 5))
+```
+- **Hypothesis:** Closeness to 10-day high under spike volume indicates resistance.
+- **Simulation Settings:**
+  - Region: `USA`
+  - Universe: `TOP3000`
+  - Neutralization: `Subindustry`
+  - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
+
+---
+
+## Alpha 21: Overnight Gap Fade
+```text
+-1 * rank(open - ts_delay(close, 1)) * rank(volume / adv20)
+```
+- **Hypothesis:** Overnight opening gaps fade when volume does not validate the move.
+- **Simulation Settings:**
+  - Region: `USA`
+  - Universe: `TOP3000`
+  - Neutralization: `Subindustry`
+  - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
+
+---
+
+## Alpha 22: Shadow Asymmetry Pressure
+```text
+rank(ts_rank(close - low, 5) - ts_rank(high - close, 5))
+```
+- **Hypothesis:** Persistent bottom-shadow buying dominance predicts bullish drift.
+- **Simulation Settings:**
+  - Region: `USA`
+  - Universe: `TOP3000`
+  - Neutralization: `Subindustry`
+  - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
+
+---
+
+## Alpha 23: Gap Decay Mean Reversion
+```text
+-1 * rank(ts_delay(close, 1) - open) * rank(ts_stddev(returns, 5))
+```
+- **Hypothesis:** Under high volatility, opening gap down experiences short-covering bounce.
+- **Simulation Settings:**
+  - Region: `USA`
+  - Universe: `TOP3000`
+  - Neutralization: `Subindustry`
+  - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
+
+---
+
+## Alpha 24: VWAP Relative Stretch
+```text
+rank(close - vwap) * rank(ts_decay_linear(volume, 5) / adv20)
+```
+- **Hypothesis:** Moderate VWAP extension with persistent volume confirms institutional demand.
+- **Simulation Settings:**
+  - Region: `USA`
+  - Universe: `TOP3000`
+  - Neutralization: `Subindustry`
+  - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
+
+---
+
+## Alpha 25: Extreme One-Day Volume Exhaustion
+```text
+-1 * rank(delta(close, 1)) * rank(ts_max(volume, 5) / adv20)
+```
+- **Hypothesis:** Single-day price surge on peak 5-day volume suffers profit-taking.
+- **Simulation Settings:**
+  - Region: `USA`
+  - Universe: `TOP3000`
+  - Neutralization: `Subindustry`
+  - Truncation: `0.08`
+  - Max Trade Weight: `0.05`
