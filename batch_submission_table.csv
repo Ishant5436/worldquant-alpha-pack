@@ -1,0 +1,26 @@
+alpha_id,name,expression,region,universe,neutralization,truncation
+1,Alpha 1: Volatility-Normalized Mean Reversion,"-1 * rank(delta(close, 5) / (high - low + 0.0001)) * rank(volume / adv20)",USA,TOP3000,Subindustry,0.08
+2,Alpha 2: Volume-Gated Range Mean Reversion,"-1 * rank(ts_rank(close, 10)) * rank(volume / adv20)",USA,TOP3000,Subindustry,0.08
+3,Alpha 3: VWAP Dislocation Mean Reversion,"-1 * rank(delta(vwap, 3)) * rank(ts_mean(volume, 5) / adv20)",USA,TOP3000,Subindustry,0.08
+4,Alpha 4: Intraday Close vs Open Fade,"-1 * rank(close - open) * rank(ts_rank(volume, 5))",USA,TOP3000,Subindustry,0.08
+5,Alpha 5: Short Horizon Decay Reversal,"-1 * rank(delta(close, 2)) * rank(ts_decay_linear(volume, 5))",USA,TOP3000,Subindustry,0.08
+6,Alpha 6: Decay Linear Acceleration,"rank(ts_decay_linear(delta(close, 5), 10)) * rank(adv20 / ts_mean(volume, 20))",USA,TOP3000,Subindustry,0.08
+7,Alpha 7: Price Volume Correlation Trend,"rank(ts_rank(close, 20)) * rank(ts_corr(close, volume, 10))",USA,TOP3000,Subindustry,0.08
+8,Alpha 8: Multi-Horizon Price Momentum,"rank(close - ts_delay(close, 10)) * rank(ts_decay_linear(volume, 10))",USA,TOP3000,Subindustry,0.08
+9,Alpha 9: Moving Average Gap Breakout,"rank(ts_mean(close, 5) - ts_mean(close, 20)) * rank(volume / adv20)",USA,TOP3000,Subindustry,0.08
+10,Alpha 10: VWAP Trend with Return Volume Coupling,"rank(delta(vwap, 5)) * rank(ts_corr(returns, volume, 15))",USA,TOP3000,Subindustry,0.08
+11,Alpha 11: Intraday VWAP Dislocation Reversal,"rank(ts_decay_linear(vwap - close, 5)) * rank(ts_rank(volume, 10))",USA,TOP3000,Subindustry,0.08
+12,Alpha 12: Price-Volume Correlation Divergence,"-1 * rank(ts_corr(close, volume, 10)) * rank(delta(close, 3))",USA,TOP3000,Subindustry,0.08
+13,Alpha 13: Liquidity Shock Impact,"rank(volume / adv20) * rank(delta(close, 1) / (high - low + 0.001))",USA,TOP3000,Subindustry,0.08
+14,Alpha 14: Volatility Damped Drift,"-1 * rank(ts_stddev(returns, 10)) * rank(delta(close, 5))",USA,TOP3000,Subindustry,0.08
+15,Alpha 15: Weighted Intraday Pressure,"rank(ts_decay_linear(close - open, 3)) * rank(volume / ts_mean(volume, 10))",USA,TOP3000,Subindustry,0.08
+16,Alpha 16: Dispersion Normalized Trend Fade,"-1 * rank(ts_stddev(close, 20) / ts_mean(close, 20)) * rank(delta(close, 5))",USA,TOP3000,Subindustry,0.08
+17,Alpha 17: True Range Expansion with Volume,"rank(ts_rank(high - low, 10)) * rank(delta(volume, 3))",USA,TOP3000,Subindustry,0.08
+18,Alpha 18: Range Contraction Reversal,"-1 * rank(delta(high - low, 5)) * rank(ts_corr(close, vwap, 10))",USA,TOP3000,Subindustry,0.08
+19,Alpha 19: Volume Volatility Premium,"rank(ts_decay_linear(returns, 5)) * rank(ts_stddev(volume, 10) / adv20)",USA,TOP3000,Subindustry,0.08
+20,Alpha 20: Upper Range Exhaustion,"-1 * rank(ts_max(high, 10) - close) * rank(ts_rank(volume, 5))",USA,TOP3000,Subindustry,0.08
+21,Alpha 21: Overnight Gap Fade,"-1 * rank(open - ts_delay(close, 1)) * rank(volume / adv20)",USA,TOP3000,Subindustry,0.08
+22,Alpha 22: Shadow Asymmetry Pressure,"rank(ts_rank(close - low, 5) - ts_rank(high - close, 5))",USA,TOP3000,Subindustry,0.08
+23,Alpha 23: Gap Decay Mean Reversion,"-1 * rank(ts_delay(close, 1) - open) * rank(ts_stddev(returns, 5))",USA,TOP3000,Subindustry,0.08
+24,Alpha 24: VWAP Relative Stretch,"rank(close - vwap) * rank(ts_decay_linear(volume, 5) / adv20)",USA,TOP3000,Subindustry,0.08
+25,Alpha 25: Extreme One-Day Volume Exhaustion,"-1 * rank(delta(close, 1)) * rank(ts_max(volume, 5) / adv20)",USA,TOP3000,Subindustry,0.08
