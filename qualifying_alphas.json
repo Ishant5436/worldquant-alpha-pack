@@ -1,0 +1,307 @@
+{
+  "mode": "DRY_RUN",
+  "total": 25,
+  "qualifying": 25,
+  "alphas": [
+    {
+      "number": 1,
+      "name": "Alpha 1: Volatility-Normalized Mean Reversion",
+      "status": "VALIDATED_LOCAL",
+      "expression": "-1 * rank(delta(close, 5) / (high - low + 0.0001)) * rank(volume / adv20)",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 2,
+      "name": "Alpha 2: Volume-Gated Range Mean Reversion",
+      "status": "VALIDATED_LOCAL",
+      "expression": "-1 * rank(ts_rank(close, 10)) * rank(volume / adv20)",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 3,
+      "name": "Alpha 3: VWAP Dislocation Mean Reversion",
+      "status": "VALIDATED_LOCAL",
+      "expression": "-1 * rank(delta(vwap, 3)) * rank(ts_mean(volume, 5) / adv20)",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 4,
+      "name": "Alpha 4: Intraday Close vs Open Fade",
+      "status": "VALIDATED_LOCAL",
+      "expression": "-1 * rank(close - open) * rank(ts_rank(volume, 5))",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 5,
+      "name": "Alpha 5: Short Horizon Decay Reversal",
+      "status": "VALIDATED_LOCAL",
+      "expression": "-1 * rank(delta(close, 2)) * rank(ts_decay_linear(volume, 5))",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 6,
+      "name": "Alpha 6: Decay Linear Acceleration",
+      "status": "VALIDATED_LOCAL",
+      "expression": "rank(ts_decay_linear(delta(close, 5), 10)) * rank(adv20 / ts_mean(volume, 20))",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 7,
+      "name": "Alpha 7: Price Volume Correlation Trend",
+      "status": "VALIDATED_LOCAL",
+      "expression": "rank(ts_rank(close, 20)) * rank(ts_corr(close, volume, 10))",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 8,
+      "name": "Alpha 8: Multi-Horizon Price Momentum",
+      "status": "VALIDATED_LOCAL",
+      "expression": "rank(close - ts_delay(close, 10)) * rank(ts_decay_linear(volume, 10))",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 9,
+      "name": "Alpha 9: Moving Average Gap Breakout",
+      "status": "VALIDATED_LOCAL",
+      "expression": "rank(ts_mean(close, 5) - ts_mean(close, 20)) * rank(volume / adv20)",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 10,
+      "name": "Alpha 10: VWAP Trend with Return Volume Coupling",
+      "status": "VALIDATED_LOCAL",
+      "expression": "rank(delta(vwap, 5)) * rank(ts_corr(returns, volume, 15))",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 11,
+      "name": "Alpha 11: Intraday VWAP Dislocation Reversal",
+      "status": "VALIDATED_LOCAL",
+      "expression": "rank(ts_decay_linear(vwap - close, 5)) * rank(ts_rank(volume, 10))",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 12,
+      "name": "Alpha 12: Price-Volume Correlation Divergence",
+      "status": "VALIDATED_LOCAL",
+      "expression": "-1 * rank(ts_corr(close, volume, 10)) * rank(delta(close, 3))",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 13,
+      "name": "Alpha 13: Liquidity Shock Impact",
+      "status": "VALIDATED_LOCAL",
+      "expression": "rank(volume / adv20) * rank(delta(close, 1) / (high - low + 0.001))",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 14,
+      "name": "Alpha 14: Volatility Damped Drift",
+      "status": "VALIDATED_LOCAL",
+      "expression": "-1 * rank(ts_stddev(returns, 10)) * rank(delta(close, 5))",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 15,
+      "name": "Alpha 15: Weighted Intraday Pressure",
+      "status": "VALIDATED_LOCAL",
+      "expression": "rank(ts_decay_linear(close - open, 3)) * rank(volume / ts_mean(volume, 10))",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 16,
+      "name": "Alpha 16: Dispersion Normalized Trend Fade",
+      "status": "VALIDATED_LOCAL",
+      "expression": "-1 * rank(ts_stddev(close, 20) / ts_mean(close, 20)) * rank(delta(close, 5))",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 17,
+      "name": "Alpha 17: True Range Expansion with Volume",
+      "status": "VALIDATED_LOCAL",
+      "expression": "rank(ts_rank(high - low, 10)) * rank(delta(volume, 3))",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 18,
+      "name": "Alpha 18: Range Contraction Reversal",
+      "status": "VALIDATED_LOCAL",
+      "expression": "-1 * rank(delta(high - low, 5)) * rank(ts_corr(close, vwap, 10))",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 19,
+      "name": "Alpha 19: Volume Volatility Premium",
+      "status": "VALIDATED_LOCAL",
+      "expression": "rank(ts_decay_linear(returns, 5)) * rank(ts_stddev(volume, 10) / adv20)",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 20,
+      "name": "Alpha 20: Upper Range Exhaustion",
+      "status": "VALIDATED_LOCAL",
+      "expression": "-1 * rank(ts_max(high, 10) - close) * rank(ts_rank(volume, 5))",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 21,
+      "name": "Alpha 21: Overnight Gap Fade",
+      "status": "VALIDATED_LOCAL",
+      "expression": "-1 * rank(open - ts_delay(close, 1)) * rank(volume / adv20)",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 22,
+      "name": "Alpha 22: Shadow Asymmetry Pressure",
+      "status": "VALIDATED_LOCAL",
+      "expression": "rank(ts_rank(close - low, 5) - ts_rank(high - close, 5))",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 23,
+      "name": "Alpha 23: Gap Decay Mean Reversion",
+      "status": "VALIDATED_LOCAL",
+      "expression": "-1 * rank(ts_delay(close, 1) - open) * rank(ts_stddev(returns, 5))",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 24,
+      "name": "Alpha 24: VWAP Relative Stretch",
+      "status": "VALIDATED_LOCAL",
+      "expression": "rank(close - vwap) * rank(ts_decay_linear(volume, 5) / adv20)",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    },
+    {
+      "number": 25,
+      "name": "Alpha 25: Extreme One-Day Volume Exhaustion",
+      "status": "VALIDATED_LOCAL",
+      "expression": "-1 * rank(delta(close, 1)) * rank(ts_max(volume, 5) / adv20)",
+      "settings": {
+        "Region": "USA",
+        "Universe": "TOP3000",
+        "Neutralization": "Subindustry",
+        "Truncation": "0.08"
+      }
+    }
+  ]
+}
