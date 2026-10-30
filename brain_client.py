@@ -27,7 +27,7 @@ class _BrainSession:
         assert self.opener is not None, "Opener initialization invariant failed"
 
     def post(self, url: str, json_data: Optional[Dict[str, Any]] = None, auth: Optional[tuple] = None, timeout: int = 15):
-        """Sends HTTP POST request with JSON payload and optional basic auth."""
+        """Sends HTTP POST request with JSON payload, optional basic auth, and 429 backoff."""
         assert isinstance(url, str) and url.startswith("http"), "Invalid URL"
         assert timeout > 0, "Timeout must be positive"
 
@@ -41,15 +41,35 @@ class _BrainSession:
             b64_auth = base64.b64encode(creds).decode("ascii")
             req.add_header("Authorization", f"Basic {b64_auth}")
 
-        return self.opener.open(req, timeout=timeout)
+        for attempt in range(3):
+            try:
+                return self.opener.open(req, timeout=timeout)
+            except urllib.error.HTTPError as err:
+                if err.code == 429 and attempt < 2:
+                    wait_sec = int(err.headers.get("RateLimit-Reset", err.headers.get("Retry-After", "30")))
+                    time.sleep(min(wait_sec + 2, 65))
+                    continue
+                raise err
+        raise RuntimeError("POST request retries exhausted")
 
     def get(self, url: str, timeout: int = 10):
-        """Sends HTTP GET request."""
+        """Sends HTTP GET request with automatic 429 rate-limit backoff."""
         assert isinstance(url, str) and url.startswith("http"), "Invalid URL"
         assert timeout > 0, "Timeout must be positive"
+
         req = urllib.request.Request(url, method="GET")
         req.add_header("Accept", "application/json")
-        return self.opener.open(req, timeout=timeout)
+
+        for attempt in range(3):
+            try:
+                return self.opener.open(req, timeout=timeout)
+            except urllib.error.HTTPError as err:
+                if err.code == 429 and attempt < 2:
+                    wait_sec = int(err.headers.get("RateLimit-Reset", err.headers.get("Retry-After", "30")))
+                    time.sleep(min(wait_sec + 2, 65))
+                    continue
+                raise err
+        raise RuntimeError("GET request retries exhausted")
 
 
 class BrainAPIClient:

@@ -1,0 +1,86 @@
+{
+  "account": "IP68012",
+  "competition": "challenge",
+  "submitted_count": 3,
+  "target_count": 30,
+  "alphas": [
+    {
+      "number": 1,
+      "id": "leAJJngN",
+      "name": "Volatility-Normalized 2-Day Mean Reversion",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-29T11:47:00-04:00",
+      "expression": "-1 * group_zscore(((ts_delta(close, 1) + 0.5 * ts_delta(close, 2)) / close) / ts_std_dev(returns, 20), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 7,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.78,
+        "fitness": 1.00,
+        "turnover": 0.5344,
+        "pnl": 8316889,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 2,
+      "id": "akK2K321",
+      "name": "Cash Flow Accrual Quality + VWAP Disparity Composite",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-30T01:20:00-04:00",
+      "expression": "0.4 * (group_zscore(cashflow_op / cap, subindustry) - group_zscore((income - cashflow_op) / cap, subindustry)) - 0.8 * group_zscore(ts_decay_linear((close - vwap) / (high - low + 0.001 * close), 2), subindustry) * group_rank(volume / adv20, subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 7,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.26,
+        "fitness": 1.01,
+        "turnover": 0.1703,
+        "pnl": 5422650,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 3,
+      "id": "npvkekRl",
+      "name": "DuPont Efficiency (Operating ROA + Sales Turnover) + 5-Day MA Timing",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-30T01:55:04-04:00",
+      "expression": "0.3 * (group_zscore(ebitda / assets, subindustry) + group_zscore(sales / assets, subindustry)) - 0.9 * group_zscore(ts_decay_linear(ts_av_diff(close, 5) / (close * ts_std_dev(returns, 20)), 2), subindustry) * group_rank(volume / adv20, subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 8,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.49,
+        "fitness": 1.06,
+        "turnover": 0.2161,
+        "pnl": 5405367,
+        "selfCorrelation": 0.6007
+      }
+    }
+  ]
+}
