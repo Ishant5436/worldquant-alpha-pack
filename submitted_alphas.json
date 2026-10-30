@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 7,
+  "submitted_count": 8,
   "target_count": 30,
   "alphas": [
     {
@@ -191,6 +191,33 @@
         "drawdown": 0.0528,
         "margin": 0.000982,
         "pnl": 3518174,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 8,
+      "id": "0mYdjL02",
+      "name": "Official Bronze Concept 2: Analyst Price Target to FCF Estimate 42-Day Correlation",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-30T14:36:00-04:00",
+      "expression": "group_rank(-ts_corr(ts_backfill(est_ptp, 20), ts_backfill(est_fcf, 20), 42), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 2,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.53,
+        "fitness": 1.01,
+        "turnover": 0.1460,
+        "returns": 0.0630,
+        "pnl": 3131762,
         "selfCorrelation": 0.0
       }
     }
