@@ -83,3 +83,19 @@ def test_brain_client_poll_simulation():
         assert res["status"] == "COMPLETED"
         assert res["sharpe"] == 1.45
         assert res["turnover"] == 0.35
+
+
+def test_submitted_alphas_portfolio_structure():
+    """Verify submitted_alphas.json holds valid active OS alphas."""
+    sub_path = os.path.join(os.path.dirname(__file__), "..", "submitted_alphas.json")
+    assert os.path.exists(sub_path), "submitted_alphas.json must exist"
+    with open(sub_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    assert data["submitted_count"] == 5, f"Expected 5 alphas, got {data['submitted_count']}"
+    assert len(data["alphas"]) == 5, f"Expected 5 alpha records, got {len(data['alphas'])}"
+    for a in data["alphas"]:
+        assert a["stage"] == "OS"
+        assert a["status"] == "ACTIVE"
+        assert a["metrics"]["sharpe"] >= 1.25
+        assert a["metrics"]["fitness"] >= 1.00
+

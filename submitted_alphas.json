@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 4,
+  "submitted_count": 5,
   "target_count": 30,
   "alphas": [
     {
@@ -106,6 +106,34 @@
         "turnover": 0.1866,
         "pnl": 7255480,
         "selfCorrelation": 0.7834
+      }
+    },
+    {
+      "number": 5,
+      "id": "e75KAO16",
+      "name": "Quality Solvency Anchor (Cash Yield + Operating ROA) + 5-Day VWAP Deviation Timing",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-30T11:19:47-04:00",
+      "expression": "0.35 * (group_zscore(cash / cap, subindustry) + group_zscore(operating_income / assets, subindustry)) - 0.85 * group_zscore(ts_decay_linear((close - ts_decay_linear(vwap, 5)) / (close * ts_std_dev(returns, 20)), 2), subindustry) * group_rank(volume / adv20, subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 8,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.78,
+        "fitness": 1.37,
+        "turnover": 0.2334,
+        "returns": 0.1387,
+        "pnl": 6862555,
+        "drawdown": 0.1059,
+        "selfCorrelation": 0.0
       }
     }
   ]
