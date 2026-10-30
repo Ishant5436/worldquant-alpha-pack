@@ -1,13 +1,13 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 3,
+  "submitted_count": 4,
   "target_count": 30,
   "alphas": [
     {
       "number": 1,
       "id": "leAJJngN",
-      "name": "Volatility-Normalized 2-Day Mean Reversion",
+      "name": "Volatility-Normalized 2-Day Return Reversal",
       "stage": "OS",
       "status": "ACTIVE",
       "date_submitted": "2026-10-29T11:47:00-04:00",
@@ -80,6 +80,32 @@
         "turnover": 0.2161,
         "pnl": 5405367,
         "selfCorrelation": 0.6007
+      }
+    },
+    {
+      "number": 4,
+      "id": "vR1xYd8z",
+      "name": "Composite Value (Book-to-Price + EBITDA Yield) + 3-Day Candlestick Body Reversal",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-30T07:53:15-04:00",
+      "expression": "0.35 * (group_zscore(bookvalue_ps / close, subindustry) + group_zscore(ebitda / cap, subindustry)) - 0.85 * group_zscore(ts_decay_linear((close - open) / (high - low + 0.001 * vwap), 3), subindustry) * group_rank(volume / adv20, subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 9,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.54,
+        "fitness": 1.36,
+        "turnover": 0.1866,
+        "pnl": 7255480,
+        "selfCorrelation": 0.7834
       }
     }
   ]
