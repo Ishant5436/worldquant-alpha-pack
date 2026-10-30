@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 6,
+  "submitted_count": 7,
   "target_count": 30,
   "alphas": [
     {
@@ -162,6 +162,35 @@
         "drawdown": 0.0829,
         "margin": 0.000847,
         "pnl": 8498499,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 7,
+      "id": "VkxEarq0",
+      "name": "Official Bronze Concept 1: Enterprise Value to Operating Cash Flow 63-Day Z-Score",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-30T14:16:11-04:00",
+      "expression": "group_rank(-ts_zscore(enterprise_value / cashflow_op, 63), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 5,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.53,
+        "fitness": 1.07,
+        "turnover": 0.1447,
+        "returns": 0.0711,
+        "drawdown": 0.0528,
+        "margin": 0.000982,
+        "pnl": 3518174,
         "selfCorrelation": 0.0
       }
     }
