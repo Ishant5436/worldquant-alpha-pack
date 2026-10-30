@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 8,
+  "submitted_count": 9,
   "target_count": 30,
   "alphas": [
     {
@@ -218,6 +218,33 @@
         "turnover": 0.1460,
         "returns": 0.0630,
         "pnl": 3131762,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 9,
+      "id": "kqNXNob8",
+      "name": "Official Bronze Concept 3: Call Implied vs Parkinson Historical Volatility Arbitrage",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-30T14:43:00-04:00",
+      "expression": "group_rank(ts_backfill(implied_volatility_call_120, 10) / (ts_backfill(parkinson_volatility_120, 10) + 0.0001), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP1000",
+        "delay": 1,
+        "decay": 5,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.65,
+        "fitness": 1.22,
+        "turnover": 0.1170,
+        "returns": 0.0680,
+        "pnl": 3381326,
         "selfCorrelation": 0.0
       }
     }
