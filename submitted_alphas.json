@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 10,
+  "submitted_count": 11,
   "target_count": 30,
   "alphas": [
     {
@@ -272,6 +272,33 @@
         "turnover": 0.0920,
         "returns": 0.0650,
         "pnl": 3232287,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 11,
+      "id": "GrW6ZE7x",
+      "name": "Analyst Target Price Upside 126-Day Time Series Rank",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-30T17:31:58-04:00",
+      "expression": "group_rank(ts_rank(ts_backfill(est_ptp, 10) / close, 126), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 5,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.74,
+        "fitness": 1.26,
+        "turnover": 0.1212,
+        "returns": 0.0650,
+        "pnl": 3224423,
         "selfCorrelation": 0.0
       }
     }
