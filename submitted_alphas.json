@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 24,
+  "submitted_count": 25,
   "target_count": 30,
   "alphas": [
     {
@@ -667,6 +667,35 @@
         "margin": 0.001297,
         "pnl": 3171656,
         "selfCorrelation": 0.5892
+      }
+    },
+    {
+      "number": 25,
+      "id": "e75dp0RE",
+      "name": "Forward Net Profit Consensus Yield (Annual Mean / Market Cap)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-31T11:15:15-04:00",
+      "expression": "group_rank(ts_rank(ts_backfill(anl4_fs_detail_estimates_advanced_af_nd_netprofit_mean, 10) / (cap + 0.001), 126), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 2.31,
+        "fitness": 1.99,
+        "turnover": 0.114,
+        "returns": 0.0927,
+        "drawdown": 0.0327,
+        "margin": 0.001626,
+        "pnl": 4587936,
+        "selfCorrelation": 0.69
       }
     }
   ]
