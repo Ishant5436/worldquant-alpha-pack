@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 14,
+  "submitted_count": 15,
   "target_count": 30,
   "alphas": [
     {
@@ -381,6 +381,33 @@
         "returns": 0.0581,
         "pnl": 2876174,
         "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 15,
+      "id": "78LXa6gv",
+      "name": "Gross Profit to Equity 252D + Candlestick Reversal Blend",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-30T22:34:00-04:00",
+      "expression": "0.65 * group_zscore(ts_rank((sales - cogs) / (equity + 0.001 * cap), 252), subindustry) + 0.35 * group_zscore((open - close) / (high - low + 0.001 * close), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 5,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.98,
+        "fitness": 1.14,
+        "turnover": 0.2082,
+        "returns": 0.0695,
+        "pnl": 3439180,
+        "selfCorrelation": 0.6584
       }
     }
   ]
