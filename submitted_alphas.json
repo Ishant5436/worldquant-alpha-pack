@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 21,
+  "submitted_count": 22,
   "target_count": 30,
   "alphas": [
     {
@@ -580,6 +580,35 @@
         "margin": 0.001272,
         "pnl": 2925169,
         "selfCorrelation": 0.5971
+      }
+    },
+    {
+      "number": 22,
+      "id": "vR1eRgLQ",
+      "name": "Tri-Factor Value Efficiency: EV/EBITDA + Asset Turnover + Share Buyback (0.40/0.40/0.20 Blend)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-31T10:38:40-04:00",
+      "expression": "0.40 * group_zscore(-ts_zscore(enterprise_value / (ebitda + 0.001 * cap), 63), subindustry) + 0.40 * group_zscore(ts_rank(sales / (assets + 0.001 * cap), 252), subindustry) + 0.20 * group_zscore(-ts_rank(ts_delta(sharesout, 252) / (sharesout + 0.001), 126), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.46,
+        "fitness": 1.04,
+        "turnover": 0.1119,
+        "returns": 0.0637,
+        "drawdown": 0.0381,
+        "margin": 0.001138,
+        "pnl": 3149907,
+        "selfCorrelation": 0.6985
       }
     }
   ]
