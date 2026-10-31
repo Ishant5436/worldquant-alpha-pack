@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 26,
+  "submitted_count": 27,
   "target_count": 30,
   "alphas": [
     {
@@ -725,6 +725,35 @@
         "margin": 0.001691,
         "pnl": 3096154,
         "selfCorrelation": 0.68
+      }
+    },
+    {
+      "number": 27,
+      "id": "E56gJq3K",
+      "name": "Forward Pretax Profit Consensus Yield (TOP1000 Universe)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-31T11:41:46-04:00",
+      "expression": "group_rank(ts_rank(ts_backfill(anl4_fs_detail_estimates_advanced_af_nd_ptp_mean, 10) / (enterprise_value + 0.001 * cap), 126), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP1000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.5,
+        "fitness": 1.04,
+        "turnover": 0.1432,
+        "returns": 0.0694,
+        "drawdown": 0.0396,
+        "margin": 0.00097,
+        "pnl": 3433847,
+        "selfCorrelation": 0.65
       }
     }
   ]
