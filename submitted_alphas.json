@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 28,
+  "submitted_count": 29,
   "target_count": 30,
   "alphas": [
     {
@@ -783,6 +783,35 @@
         "margin": 0.001544,
         "pnl": 3967518,
         "selfCorrelation": 0.64
+      }
+    },
+    {
+      "number": 29,
+      "id": "JjegLAOl",
+      "name": "Tri-Factor Forward FCF Yield + Operating Margin + Asset Turnover Efficiency",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-31T11:58:04-04:00",
+      "expression": "0.35 * group_zscore(ts_rank(ts_backfill(anl4_fs_detail_estimates_advanced_af_nd_fcf_mean, 10) / (enterprise_value + 0.001 * cap), 126), subindustry) + 0.35 * group_zscore(ts_rank(operating_income / (sales + 0.001 * cap), 252), subindustry) + 0.30 * group_zscore(ts_rank(sales / (assets + 0.001 * cap), 252), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.48,
+        "fitness": 1.03,
+        "turnover": 0.0952,
+        "returns": 0.06,
+        "drawdown": 0.0647,
+        "margin": 0.00126,
+        "pnl": 2968332,
+        "selfCorrelation": 0.62
       }
     }
   ]
