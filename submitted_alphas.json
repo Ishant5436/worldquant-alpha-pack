@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 17,
+  "submitted_count": 18,
   "target_count": 30,
   "alphas": [
     {
@@ -463,6 +463,35 @@
         "drawdown": 0.0465,
         "margin": 0.00147,
         "pnl": 4442972,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 18,
+      "id": "vR1zOx3w",
+      "name": "EBITDA ROA 126D + Candlestick Flow Reversal (0.60/0.40 Blend)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-31T01:04:34-04:00",
+      "expression": "0.60 * group_zscore(ts_rank(ebitda / (assets + 0.001 * cap), 126), subindustry) + 0.40 * group_zscore((open - close) / (high - low + 0.001 * close), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.81,
+        "fitness": 1.02,
+        "turnover": 0.2175,
+        "returns": 0.0697,
+        "drawdown": 0.0332,
+        "margin": 0.000641,
+        "pnl": 3450341,
         "selfCorrelation": 0.0
       }
     }
