@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 29,
+  "submitted_count": 30,
   "target_count": 30,
   "alphas": [
     {
@@ -812,6 +812,35 @@
         "margin": 0.00126,
         "pnl": 2968332,
         "selfCorrelation": 0.62
+      }
+    },
+    {
+      "number": 30,
+      "id": "bl6opQdm",
+      "name": "Tri-Factor Pretax Profit Yield + Capital Asset Turnover + Net Share Buybacks",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-31T12:03:58-04:00",
+      "expression": "0.35 * group_zscore(ts_rank(ts_backfill(anl4_fs_detail_estimates_advanced_af_nd_ptp_mean, 10) / (enterprise_value + 0.001 * cap), 126), subindustry) + 0.35 * group_zscore(ts_rank(sales / (assets + 0.001 * cap), 252), subindustry) + 0.30 * group_zscore(-ts_rank(ts_delta(sharesout, 252) / (sharesout + 0.001), 126), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.87,
+        "fitness": 1.41,
+        "turnover": 0.0977,
+        "returns": 0.071,
+        "drawdown": 0.0334,
+        "margin": 0.001453,
+        "pnl": 3511826,
+        "selfCorrelation": 0.61
       }
     }
   ]
