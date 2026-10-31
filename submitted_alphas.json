@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 25,
+  "submitted_count": 26,
   "target_count": 30,
   "alphas": [
     {
@@ -696,6 +696,35 @@
         "margin": 0.001626,
         "pnl": 4587936,
         "selfCorrelation": 0.69
+      }
+    },
+    {
+      "number": 26,
+      "id": "mLorRZlp",
+      "name": "Forward Net Profit Yield + Net Share Repurchase Factor (0.35/0.65 Blend)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-31T11:21:20-04:00",
+      "expression": "0.35 * group_zscore(ts_rank(ts_backfill(anl4_fs_detail_estimates_advanced_af_nd_netprofit_mean, 10) / (cap + 0.001), 126), subindustry) + 0.65 * group_zscore(-ts_rank(ts_delta(sharesout, 252) / (sharesout + 0.001), 126), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 2.22,
+        "fitness": 1.57,
+        "turnover": 0.074,
+        "returns": 0.0626,
+        "drawdown": 0.0219,
+        "margin": 0.001691,
+        "pnl": 3096154,
+        "selfCorrelation": 0.68
       }
     }
   ]
