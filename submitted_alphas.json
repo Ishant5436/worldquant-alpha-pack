@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 18,
+  "submitted_count": 19,
   "target_count": 30,
   "alphas": [
     {
@@ -492,6 +492,35 @@
         "drawdown": 0.0332,
         "margin": 0.000641,
         "pnl": 3450341,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 19,
+      "id": "e752Ev26",
+      "name": "DuPont Net ROA 126D + Candlestick Flow Reversal (0.60/0.40 Blend)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-31T01:52:50-04:00",
+      "expression": "0.60 * group_zscore(ts_rank(income / (assets + 0.001 * cap), 126), subindustry) + 0.40 * group_zscore((open - close) / (high - low + 0.001 * close), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 2.33,
+        "fitness": 1.36,
+        "turnover": 0.2167,
+        "returns": 0.0742,
+        "drawdown": 0.0324,
+        "margin": 0.000685,
+        "pnl": 3673556,
         "selfCorrelation": 0.0
       }
     }
