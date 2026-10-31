@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 16,
+  "submitted_count": 17,
   "target_count": 30,
   "alphas": [
     {
@@ -434,6 +434,35 @@
         "turnover": 0.2081,
         "returns": 0.0744,
         "pnl": 3680708,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 17,
+      "id": "gJeP95RJ",
+      "name": "Forward Consensus EPS Yield 126-Day Time Series Rank",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-31T00:20:45-04:00",
+      "expression": "group_rank(ts_rank(anl4_fs_detail_estimates_basic_af_v4_nd_eps_mean / (close + 0.001), 126), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 5,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 2.05,
+        "fitness": 1.74,
+        "turnover": 0.1211,
+        "returns": 0.0898,
+        "drawdown": 0.0465,
+        "margin": 0.00147,
+        "pnl": 4442972,
         "selfCorrelation": 0.0
       }
     }
