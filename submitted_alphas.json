@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 19,
+  "submitted_count": 20,
   "target_count": 30,
   "alphas": [
     {
@@ -521,6 +521,35 @@
         "drawdown": 0.0324,
         "margin": 0.000685,
         "pnl": 3673556,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 20,
+      "id": "VkxY16zV",
+      "name": "Free Cash Flow Yield 252D + Candlestick Flow Reversal (0.60/0.40 Blend)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-31T02:21:20-04:00",
+      "expression": "0.60 * group_zscore(ts_rank((cashflow_op - capex) / (cap + 0.001), 252), subindustry) + 0.40 * group_zscore((open - close) / (high - low + 0.001 * close), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 2.08,
+        "fitness": 1.37,
+        "turnover": 0.2114,
+        "returns": 0.0912,
+        "drawdown": 0.0466,
+        "margin": 0.000862,
+        "pnl": 4510571,
         "selfCorrelation": 0.0
       }
     }
