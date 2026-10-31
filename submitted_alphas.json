@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 27,
+  "submitted_count": 28,
   "target_count": 30,
   "alphas": [
     {
@@ -754,6 +754,35 @@
         "margin": 0.00097,
         "pnl": 3433847,
         "selfCorrelation": 0.65
+      }
+    },
+    {
+      "number": 28,
+      "id": "rKRJmPOJ",
+      "name": "Tri-Factor Profitability (Net Profit Consensus + Operating Margin + Cash-to-Debt)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-31T11:52:56-04:00",
+      "expression": "0.35 * group_zscore(ts_rank(ts_backfill(anl4_fs_detail_estimates_advanced_af_nd_netprofit_mean, 10) / (cap + 0.001), 126), subindustry) + 0.35 * group_zscore(ts_rank(operating_income / (sales + 0.001 * cap), 252), subindustry) + 0.30 * group_zscore(ts_rank(cash / (debt + 0.001 * cap), 126), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.76,
+        "fitness": 1.41,
+        "turnover": 0.1039,
+        "returns": 0.0802,
+        "drawdown": 0.0771,
+        "margin": 0.001544,
+        "pnl": 3967518,
+        "selfCorrelation": 0.64
       }
     }
   ]
