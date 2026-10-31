@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 23,
+  "submitted_count": 24,
   "target_count": 30,
   "alphas": [
     {
@@ -638,6 +638,35 @@
         "margin": 0.00142,
         "pnl": 3194561,
         "selfCorrelation": 0.6843
+      }
+    },
+    {
+      "number": 24,
+      "id": "npvZxjWw",
+      "name": "Forward EBIT Yield + Capital Asset Turnover Efficiency (0.44/0.56 Blend)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-31T10:56:44-04:00",
+      "expression": "0.44 * group_zscore(ts_rank(ts_backfill(anl4_fs_detail_estimates_advanced_af_nd_ebit_high, 10) / (enterprise_value + 0.001 * cap), 126), subindustry) + 0.56 * group_zscore(ts_rank(sales / (assets + 0.001 * cap), 252), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.52,
+        "fitness": 1.09,
+        "turnover": 0.0989,
+        "returns": 0.0641,
+        "drawdown": 0.0566,
+        "margin": 0.001297,
+        "pnl": 3171656,
+        "selfCorrelation": 0.5892
       }
     }
   ]
