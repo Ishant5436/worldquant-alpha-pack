@@ -26,8 +26,8 @@ class _BrainSession:
         assert self.cookie_jar is not None, "Cookie jar initialization invariant failed"
         assert self.opener is not None, "Opener initialization invariant failed"
 
-    def post(self, url: str, json_data: Optional[Dict[str, Any]] = None, auth: Optional[tuple] = None, timeout: int = 15):
-        """Sends HTTP POST request with JSON payload, optional basic auth, and 429 backoff."""
+    def post(self, url: str, json_data: Optional[Dict[str, Any]] = None, auth: Optional[tuple] = None, timeout: int = 25):
+        """Sends HTTP POST request with JSON payload, basic auth, and retry backoff."""
         assert isinstance(url, str) and url.startswith("http"), "Invalid URL"
         assert timeout > 0, "Timeout must be positive"
 
@@ -41,34 +41,44 @@ class _BrainSession:
             b64_auth = base64.b64encode(creds).decode("ascii")
             req.add_header("Authorization", f"Basic {b64_auth}")
 
-        for attempt in range(3):
+        for attempt in range(4):
             try:
                 return self.opener.open(req, timeout=timeout)
             except urllib.error.HTTPError as err:
-                if err.code == 429 and attempt < 2:
+                if err.code == 429 and attempt < 3:
                     wait_sec = int(err.headers.get("RateLimit-Reset", err.headers.get("Retry-After", "30")))
                     time.sleep(min(wait_sec + 2, 65))
                     continue
                 raise err
+            except (urllib.error.URLError, TimeoutError) as net_err:
+                if attempt < 3:
+                    time.sleep(3 + attempt * 2)
+                    continue
+                raise net_err
         raise RuntimeError("POST request retries exhausted")
 
-    def get(self, url: str, timeout: int = 10):
-        """Sends HTTP GET request with automatic 429 rate-limit backoff."""
+    def get(self, url: str, timeout: int = 25):
+        """Sends HTTP GET request with retry and automatic 429 backoff."""
         assert isinstance(url, str) and url.startswith("http"), "Invalid URL"
         assert timeout > 0, "Timeout must be positive"
 
         req = urllib.request.Request(url, method="GET")
         req.add_header("Accept", "application/json")
 
-        for attempt in range(3):
+        for attempt in range(4):
             try:
                 return self.opener.open(req, timeout=timeout)
             except urllib.error.HTTPError as err:
-                if err.code == 429 and attempt < 2:
+                if err.code == 429 and attempt < 3:
                     wait_sec = int(err.headers.get("RateLimit-Reset", err.headers.get("Retry-After", "30")))
                     time.sleep(min(wait_sec + 2, 65))
                     continue
                 raise err
+            except (urllib.error.URLError, TimeoutError) as net_err:
+                if attempt < 3:
+                    time.sleep(3 + attempt * 2)
+                    continue
+                raise net_err
         raise RuntimeError("GET request retries exhausted")
 
 

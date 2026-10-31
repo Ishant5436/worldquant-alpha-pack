@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 12,
+  "submitted_count": 13,
   "target_count": 30,
   "alphas": [
     {
@@ -326,6 +326,33 @@
         "turnover": 0.1054,
         "returns": 0.1187,
         "pnl": 5871054,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 13,
+      "id": "gJePzXjl",
+      "name": "Cash Interest Coverage + 8D Price Reversal Composite",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-30T20:13:49-04:00",
+      "expression": "0.60 * group_zscore(ts_rank(cashflow_op / (interest_expense + 0.001 * cap), 126), subindustry) - 0.40 * group_zscore(ts_rank(close, 8), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 5,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.98,
+        "fitness": 1.22,
+        "turnover": 0.2493,
+        "returns": 0.0954,
+        "pnl": 4722613,
         "selfCorrelation": 0.0
       }
     }
