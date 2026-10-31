@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 15,
+  "submitted_count": 16,
   "target_count": 30,
   "alphas": [
     {
@@ -24,7 +24,7 @@
       },
       "metrics": {
         "sharpe": 1.78,
-        "fitness": 1.00,
+        "fitness": 1.0,
         "turnover": 0.5344,
         "pnl": 8316889,
         "selfCorrelation": 0.0
@@ -215,8 +215,8 @@
       "metrics": {
         "sharpe": 1.53,
         "fitness": 1.01,
-        "turnover": 0.1460,
-        "returns": 0.0630,
+        "turnover": 0.146,
+        "returns": 0.063,
         "pnl": 3131762,
         "selfCorrelation": 0.0
       }
@@ -242,8 +242,8 @@
       "metrics": {
         "sharpe": 1.65,
         "fitness": 1.22,
-        "turnover": 0.1170,
-        "returns": 0.0680,
+        "turnover": 0.117,
+        "returns": 0.068,
         "pnl": 3381326,
         "selfCorrelation": 0.0
       }
@@ -269,8 +269,8 @@
       "metrics": {
         "sharpe": 1.45,
         "fitness": 1.05,
-        "turnover": 0.0920,
-        "returns": 0.0650,
+        "turnover": 0.092,
+        "returns": 0.065,
         "pnl": 3232287,
         "selfCorrelation": 0.0
       }
@@ -297,7 +297,7 @@
         "sharpe": 1.74,
         "fitness": 1.26,
         "turnover": 0.1212,
-        "returns": 0.0650,
+        "returns": 0.065,
         "pnl": 3224423,
         "selfCorrelation": 0.0
       }
@@ -408,6 +408,33 @@
         "returns": 0.0695,
         "pnl": 3439180,
         "selfCorrelation": 0.6584
+      }
+    },
+    {
+      "number": 16,
+      "id": "2rAZ7Zjw",
+      "name": "Earnings Yield 252D + Candlestick Flow Blend",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-30T23:32:26-04:00",
+      "expression": "0.65 * group_zscore(ts_rank(eps / (close + 0.001), 252), subindustry) + 0.35 * group_zscore((open - close) / (high - low + 0.001 * close), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 5,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.69,
+        "fitness": 1.01,
+        "turnover": 0.2081,
+        "returns": 0.0744,
+        "pnl": 3680708,
+        "selfCorrelation": 0.0
       }
     }
   ]
