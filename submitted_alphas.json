@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 42,
+  "submitted_count": 43,
   "target_count": 50,
   "alphas": [
     {
@@ -1182,6 +1182,35 @@
         "drawdown": 0.0613,
         "margin": 0.000992,
         "pnl": 4286058,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 43,
+      "id": "pwd7ggAx",
+      "name": "Capital ROCE (Operating Income / (Debt + Equity)) + 5-Day MA Timing (TOP3000)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-01T11:45:50-05:00",
+      "expression": "0.60 * group_zscore(ts_rank(operating_income / (debt + equity + 0.001 * cap), 126), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 4,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.98,
+        "fitness": 1.54,
+        "turnover": 0.1519,
+        "returns": 0.091,
+        "drawdown": 0.058,
+        "margin": 0.001203,
+        "pnl": 4519414,
         "selfCorrelation": 0.0
       }
     }
