@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 34,
+  "submitted_count": 35,
   "target_count": 50,
   "alphas": [
     {
@@ -957,6 +957,35 @@
         "margin": 0.001142,
         "pnl": 6163753,
         "selfCorrelation": 0.9054
+      }
+    },
+    {
+      "number": 35,
+      "id": "mLoq5qk9",
+      "name": "Operating Debt Coverage + 5-Day Moving Average Reversion (TOP3000 Universe)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-01T00:55:08-04:00",
+      "expression": "0.60 * group_zscore(ts_rank(operating_income / (debt + 0.001 * cap), 126), subindustry) - 0.40 * group_zscore(close / ts_mean(close, 5), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.77,
+        "fitness": 1.17,
+        "turnover": 0.1968,
+        "returns": 0.0866,
+        "drawdown": 0.0689,
+        "margin": 0.00088,
+        "pnl": 4282823,
+        "selfCorrelation": 0.6988
       }
     }
   ]
