@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 41,
+  "submitted_count": 42,
   "target_count": 50,
   "alphas": [
     {
@@ -1153,6 +1153,35 @@
         "drawdown": 0.0726,
         "margin": 0.001025,
         "pnl": 4236788,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 42,
+      "id": "LLMRAz89",
+      "name": "Capital ROCE (Operating Income / (Debt + Equity)) + 5-Day MA Timing (TOP1000)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-01T11:30:45-05:00",
+      "expression": "0.60 * group_zscore(ts_rank(operating_income / (debt + equity + 0.001 * cap), 126), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP1000",
+        "delay": 1,
+        "decay": 4,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.61,
+        "fitness": 1.13,
+        "turnover": 0.1746,
+        "returns": 0.087,
+        "drawdown": 0.0613,
+        "margin": 0.000992,
+        "pnl": 4286058,
         "selfCorrelation": 0.0
       }
     }
