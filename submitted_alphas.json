@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 37,
+  "submitted_count": 38,
   "target_count": 50,
   "alphas": [
     {
@@ -1044,6 +1044,32 @@
         "margin": 0.001012,
         "pnl": 5160656,
         "selfCorrelation": 0.7338
+      }
+    },
+    {
+      "number": 38,
+      "id": "kqNQE8K8",
+      "name": "Operating Cash Flow to Equity + VWAP Disparity (TOP3000 Universe)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-01T03:56:35-05:00",
+      "expression": "0.60 * group_zscore(ts_rank(cashflow_op / (equity + 0.001 * cap), 126), subindustry) + 0.40 * group_zscore((vwap - close) / (vwap + 0.001), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 2.06,
+        "fitness": 1.24,
+        "turnover": 0.2032,
+        "pnl": 3653733,
+        "selfCorrelation": 0.7441
       }
     }
   ]
