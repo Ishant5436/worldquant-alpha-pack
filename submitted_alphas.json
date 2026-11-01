@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 48,
+  "submitted_count": 49,
   "target_count": 50,
   "alphas": [
     {
@@ -1357,6 +1357,35 @@
         "margin": 0.000958,
         "pnl": 3213837,
         "selfCorrelation": 0.667
+      }
+    },
+    {
+      "number": 49,
+      "id": "zq3Wk5zd",
+      "name": "Novy-Marx Gross Profitability ((Sales - Cogs) / Assets) + 10-Day MA Timing (TOP3000)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-01T14:33:06-05:00",
+      "expression": "0.60 * group_zscore(ts_rank((sales - cogs) / (assets + 0.001 * cap), 126), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 10) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 4,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.56,
+        "fitness": 1.1,
+        "turnover": 0.1152,
+        "returns": 0.0619,
+        "drawdown": 0.0877,
+        "margin": 0.001075,
+        "pnl": 3064842,
+        "selfCorrelation": 0.6339
       }
     }
   ]
