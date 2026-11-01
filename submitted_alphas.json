@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 33,
+  "submitted_count": 34,
   "target_count": 50,
   "alphas": [
     {
@@ -928,6 +928,35 @@
         "margin": 0.000809,
         "pnl": 4525948,
         "selfCorrelation": 0.5303
+      }
+    },
+    {
+      "number": 34,
+      "id": "j2YnZ9re",
+      "name": "Forward Net Profit Consensus Yield + VWAP Disparity (TOP3000 Universe)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-01T00:24:35-04:00",
+      "expression": "0.60 * group_zscore(ts_rank(ts_backfill(anl4_fs_detail_estimates_advanced_af_nd_netprofit_mean, 10) / (cap + 0.001), 126), subindustry) + 0.40 * group_zscore((vwap - close) / (vwap + 0.001), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 2.62,
+        "fitness": 1.98,
+        "turnover": 0.2181,
+        "returns": 0.1246,
+        "drawdown": 0.0351,
+        "margin": 0.001142,
+        "pnl": 6163753,
+        "selfCorrelation": 0.9054
       }
     }
   ]
