@@ -1,8 +1,8 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 30,
-  "target_count": 30,
+  "submitted_count": 32,
+  "target_count": 50,
   "alphas": [
     {
       "number": 1,
@@ -841,6 +841,64 @@
         "margin": 0.001453,
         "pnl": 3511826,
         "selfCorrelation": 0.61
+      }
+    },
+    {
+      "number": 31,
+      "id": "P0onn0Ep",
+      "name": "Call Implied Volatility vs Parkinson 120D + Candlestick Flow Reversal (TOP1000)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-31T23:38:35-04:00",
+      "expression": "0.60 * group_zscore(ts_backfill(implied_volatility_call_120, 10) / (ts_backfill(parkinson_volatility_120, 10) + 0.0001), subindustry) + 0.40 * group_zscore((open - close) / (high - low + 0.001 * close), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP1000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 2.21,
+        "fitness": 1.51,
+        "turnover": 0.2545,
+        "returns": 0.1191,
+        "drawdown": 0.0497,
+        "margin": 0.000936,
+        "pnl": 5892111,
+        "selfCorrelation": 0.6331
+      }
+    },
+    {
+      "number": 32,
+      "id": "LLMnnVAL",
+      "name": "Forward Pretax Profit Consensus Yield + Candlestick Flow Reversal (TOP1000)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-31T23:39:09-04:00",
+      "expression": "0.60 * group_zscore(ts_rank(ts_backfill(anl4_fs_detail_estimates_advanced_af_nd_ptp_mean, 10) / (enterprise_value + 0.001 * cap), 126), subindustry) + 0.40 * group_zscore((open - close) / (high - low + 0.001 * close), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP1000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.68,
+        "fitness": 1.02,
+        "turnover": 0.2627,
+        "returns": 0.0974,
+        "drawdown": 0.0464,
+        "margin": 0.000741,
+        "pnl": 4817980,
+        "selfCorrelation": 0.909
       }
     }
   ]
