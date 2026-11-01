@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 44,
+  "submitted_count": 45,
   "target_count": 50,
   "alphas": [
     {
@@ -1241,6 +1241,35 @@
         "margin": 0.001317,
         "pnl": 10896521,
         "selfCorrelation": 0.8068
+      }
+    },
+    {
+      "number": 45,
+      "id": "3qoA7aLz",
+      "name": "Options 270D Implied Volatility Spread Gated by Open Interest PCR (TOP1000)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-01T13:47:51-05:00",
+      "expression": "trade_when(pcr_oi_270 < 1, implied_volatility_call_270 - implied_volatility_put_270, -1)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP1000",
+        "delay": 1,
+        "decay": 4,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.26,
+        "fitness": 1.35,
+        "turnover": 0.1613,
+        "returns": 0.1846,
+        "drawdown": 0.2201,
+        "margin": 0.00229,
+        "pnl": 9135848,
+        "selfCorrelation": 0.5411
       }
     }
   ]
