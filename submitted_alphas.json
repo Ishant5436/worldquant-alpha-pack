@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 38,
+  "submitted_count": 39,
   "target_count": 50,
   "alphas": [
     {
@@ -1070,6 +1070,32 @@
         "turnover": 0.2032,
         "pnl": 3653733,
         "selfCorrelation": 0.7441
+      }
+    },
+    {
+      "number": 39,
+      "id": "YP1QlApv",
+      "name": "Tri-Factor Operating ROE + Solvency + Share Buybacks (TOP3000)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-01T08:25:48-05:00",
+      "expression": "0.40 * group_zscore(ts_rank(operating_income / (equity + 0.001 * cap), 126), subindustry) + 0.35 * group_zscore(ts_rank(cash / (debt + 0.001 * cap), 126), subindustry) + 0.25 * group_zscore(-ts_rank(ts_delta(sharesout, 252) / (sharesout + 0.001), 126), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 2.01,
+        "fitness": 1.53,
+        "turnover": 0.0883,
+        "pnl": 3593983,
+        "selfCorrelation": 0.6596
       }
     }
   ]
