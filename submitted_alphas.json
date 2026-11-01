@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 36,
+  "submitted_count": 37,
   "target_count": 50,
   "alphas": [
     {
@@ -1015,6 +1015,35 @@
         "margin": 0.000734,
         "pnl": 3464194,
         "selfCorrelation": 0.5242
+      }
+    },
+    {
+      "number": 37,
+      "id": "gJem285O",
+      "name": "Pretax Income to Equity + 5-Day Moving Average Reversion (TOP1000 Universe)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-01T03:16:00-05:00",
+      "expression": "0.60 * group_zscore(ts_rank(pretax_income / (equity + 0.001 * cap), 126), subindustry) - 0.40 * group_zscore(close / ts_mean(close, 5), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP1000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.99,
+        "fitness": 1.42,
+        "turnover": 0.2062,
+        "returns": 0.1043,
+        "drawdown": 0.0721,
+        "margin": 0.001012,
+        "pnl": 5160656,
+        "selfCorrelation": 0.7338
       }
     }
   ]
