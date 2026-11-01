@@ -91,8 +91,8 @@ def test_submitted_alphas_portfolio_structure():
     assert os.path.exists(sub_path), "submitted_alphas.json must exist"
     with open(sub_path, "r", encoding="utf-8") as f:
         data = json.load(f)
-    assert data["submitted_count"] == 40, f"Expected 40 alphas, got {data['submitted_count']}"
-    assert len(data["alphas"]) == 40, f"Expected 40 alpha records, got {len(data['alphas'])}"
+    assert data["submitted_count"] == 41, f"Expected 41 alphas, got {data['submitted_count']}"
+    assert len(data["alphas"]) == 41, f"Expected 41 alpha records, got {len(data['alphas'])}"
     for a in data["alphas"]:
         assert a["stage"] == "OS"
         assert a["status"] == "ACTIVE"
