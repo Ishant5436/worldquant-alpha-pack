@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 46,
+  "submitted_count": 47,
   "target_count": 50,
   "alphas": [
     {
@@ -1299,6 +1299,35 @@
         "margin": 0.002716,
         "pnl": 11049462,
         "selfCorrelation": 0.9567
+      }
+    },
+    {
+      "number": 47,
+      "id": "KPJLEQvN",
+      "name": "Options 180D Implied Volatility Spread Gated by Open Interest PCR (TOP500)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-01T14:15:16-05:00",
+      "expression": "trade_when(pcr_oi_180 < 1, implied_volatility_call_180 - implied_volatility_put_180, -1)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP500",
+        "delay": 1,
+        "decay": 4,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.3,
+        "fitness": 1.56,
+        "turnover": 0.1407,
+        "returns": 0.2031,
+        "drawdown": 0.2015,
+        "margin": 0.002888,
+        "pnl": 10048991,
+        "selfCorrelation": 0.6268
       }
     }
   ]
