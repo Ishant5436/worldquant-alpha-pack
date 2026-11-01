@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 39,
+  "submitted_count": 40,
   "target_count": 50,
   "alphas": [
     {
@@ -1096,6 +1096,35 @@
         "turnover": 0.0883,
         "pnl": 3593983,
         "selfCorrelation": 0.6596
+      }
+    },
+    {
+      "number": 40,
+      "id": "YP1Q3QZR",
+      "name": "Implied Volatility Spread with Market Neutralization (Silver Official)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-01T09:51:02-05:00",
+      "expression": "trade_when(pcr_oi_270 < 1, implied_volatility_call_270 - implied_volatility_put_270, -1)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 4,
+        "neutralization": "MARKET",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.87,
+        "fitness": 1.56,
+        "turnover": 0.2786,
+        "returns": 0.1945,
+        "drawdown": 0.0679,
+        "margin": 0.001396,
+        "pnl": 9625369,
+        "selfCorrelation": 0.2275
       }
     }
   ]
