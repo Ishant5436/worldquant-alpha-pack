@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 47,
+  "submitted_count": 48,
   "target_count": 50,
   "alphas": [
     {
@@ -1328,6 +1328,35 @@
         "margin": 0.002888,
         "pnl": 10048991,
         "selfCorrelation": 0.6268
+      }
+    },
+    {
+      "number": 48,
+      "id": "QPvQG5kw",
+      "name": "Cash ROCE (Cashflow Op / (Debt + Equity)) + 10-Day MA Timing (TOP3000)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-01T14:21:14-05:00",
+      "expression": "0.60 * group_zscore(ts_rank(cashflow_op / (debt + equity + 0.001 * cap), 126), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 10) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 4,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.52,
+        "fitness": 1.05,
+        "turnover": 0.1355,
+        "returns": 0.065,
+        "drawdown": 0.0444,
+        "margin": 0.000958,
+        "pnl": 3213837,
+        "selfCorrelation": 0.667
       }
     }
   ]
