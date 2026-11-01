@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 32,
+  "submitted_count": 33,
   "target_count": 50,
   "alphas": [
     {
@@ -899,6 +899,35 @@
         "margin": 0.000741,
         "pnl": 4817980,
         "selfCorrelation": 0.909
+      }
+    },
+    {
+      "number": 33,
+      "id": "P0onv9wq",
+      "name": "Operating ROE 126D + VWAP Disparity (TOP1000 Universe)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-10-31T23:57:04-04:00",
+      "expression": "0.60 * group_zscore(ts_rank(operating_income / (equity + 0.001 * cap), 126), subindustry) + 0.40 * group_zscore((vwap - close) / (vwap + 0.001), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP1000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 2.29,
+        "fitness": 1.46,
+        "turnover": 0.2261,
+        "returns": 0.0915,
+        "drawdown": 0.0339,
+        "margin": 0.000809,
+        "pnl": 4525948,
+        "selfCorrelation": 0.5303
       }
     }
   ]
