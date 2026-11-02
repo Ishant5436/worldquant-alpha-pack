@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 57,
+  "submitted_count": 58,
   "target_count": 50,
   "alphas": [
     {
@@ -1618,6 +1618,35 @@
         "margin": 0.001484,
         "pnl": 4386859,
         "selfCorrelation": 0.6973
+      }
+    },
+    {
+      "number": 58,
+      "id": "KPJ9WwEg",
+      "name": "Consensus FCF Forecast Yield + 5D MA Timing (TOP500)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-02T15:18:48.577374+00:00",
+      "expression": "0.60 * group_zscore(ts_rank(ts_backfill(anl4_fs_detail_estimates_advanced_af_nd_fcf_mean, 10) / (cap + 0.001), 126), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP500",
+        "delay": 1,
+        "decay": 4,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.92,
+        "fitness": 1.48,
+        "turnover": 0.1986,
+        "returns": 0.1182,
+        "drawdown": 0.0617,
+        "margin": 0.00119,
+        "pnl": 5847705.0,
+        "selfCorrelation": 0.0
       }
     }
   ]
