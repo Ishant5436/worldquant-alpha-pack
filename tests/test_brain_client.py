@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 """
-Unit and Mock Tests for the WorldQuant BRAIN API Client.
+Unit and Mock Tests for the WorldQuant BRAIN API Client & Fleet Monitor.
 Deterministic Safety Standards: Functions <= 60 lines, assertion density >= 2.
 """
+import io
 import json
 import os
 import sys
-import pytest
 from unittest.mock import MagicMock, patch
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from brain_client import BrainAPIClient
+from monitor_fleet import fetch_live_fleet, fetch_competition_progress, display_dashboard
 
 
 def test_brain_client_unconfigured():
@@ -98,3 +99,48 @@ def test_submitted_alphas_portfolio_structure():
         assert a["status"] == "ACTIVE"
         assert a["metrics"]["sharpe"] >= 1.25
         assert a["metrics"]["fitness"] >= 1.00
+
+
+def test_monitor_fleet_fetch_and_display():
+    """Verify monitor_fleet fetches and renders dashboard correctly."""
+    client = BrainAPIClient(email="quant@example.com", password="secure_pass")
+    client.is_authenticated = True
+
+    mock_fleet_payload = {
+        "results": [
+            {
+                "id": "alpha_1",
+                "status": "ACTIVE",
+                "settings": {"universe": "TOP3000", "decay": 4},
+                "is": {"sharpe": 1.80, "fitness": 1.40, "turnover": 0.15},
+            }
+        ]
+    }
+    mock_comp_payload = {
+        "results": [
+            {
+                "leaderboard": {"user": "IP68012", "level": "SILVER", "rank": 24000, "score": 5800.0, "alphas": 33},
+                "progress": {"level": "GOLD", "score": {"remaining": 4200.0}},
+            }
+        ]
+    }
+
+    mock_resp_fleet = MagicMock(status=200)
+    mock_resp_fleet.read.return_value = json.dumps(mock_fleet_payload).encode("utf-8")
+    mock_resp_comp = MagicMock(status=200)
+    mock_resp_comp.read.return_value = json.dumps(mock_comp_payload).encode("utf-8")
+
+    with patch.object(client.session, "get", side_effect=[mock_resp_fleet, mock_resp_comp]):
+        fleet = fetch_live_fleet(client)
+        comp = fetch_competition_progress(client)
+        assert len(fleet) == 1
+        assert comp["leaderboard"]["user"] == "IP68012"
+
+        # Test display rendering
+        captured = io.StringIO()
+        with patch("sys.stdout", captured):
+            display_dashboard(fleet, comp)
+        out = captured.getvalue()
+        assert "WORLDQUANT BRAIN" in out
+        assert "IP68012" in out
+        assert "alpha_1" in out
