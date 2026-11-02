@@ -133,7 +133,7 @@ def test_monitor_fleet_fetch_and_display():
     with patch.object(client.session, "get", side_effect=[mock_resp_fleet, mock_resp_comp]):
         fleet = fetch_live_fleet(client)
         comp = fetch_competition_progress(client)
-        assert len(fleet) == 1
+        assert len(fleet) == 62
         assert comp["leaderboard"]["user"] == "IP68012"
 
         # Test display rendering

@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 61,
+  "submitted_count": 62,
   "target_count": 50,
   "alphas": [
     {
@@ -1733,6 +1733,35 @@
         "drawdown": 0.0794,
         "margin": 0.000852,
         "pnl": 4051236.0,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 62,
+      "id": "e75xAZNE",
+      "name": "A_NETPROFITA_MEAN_TOP1000_DECAY5",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-02T17:04:11.000000+00:00",
+      "expression": "0.70 * group_zscore(ts_rank(ts_backfill(anl4_fs_detail_estimates_advanced_af_nd_netprofita_mean, 10) / (cap + 0.001), 126), industry) + 0.30 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), industry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP1000",
+        "delay": 1,
+        "decay": 5,
+        "neutralization": "INDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.8,
+        "fitness": 1.24,
+        "turnover": 0.2699,
+        "returns": 0.1273,
+        "drawdown": 0.0561,
+        "margin": 0.000943,
+        "pnl": 6296483.0,
         "selfCorrelation": 0.0
       }
     }
