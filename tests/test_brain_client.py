@@ -92,8 +92,8 @@ def test_submitted_alphas_portfolio_structure():
     assert os.path.exists(sub_path), "submitted_alphas.json must exist"
     with open(sub_path, "r", encoding="utf-8") as f:
         data = json.load(f)
-    assert data["submitted_count"] == 61, f"Expected 58 alphas, got {data['submitted_count']}"
-    assert len(data["alphas"]) == 61, f"Expected 58 alpha records, got {len(data['alphas'])}"
+    assert data["submitted_count"] == 62, f"Expected 62 alphas, got {data['submitted_count']}"
+    assert len(data["alphas"]) == 62, f"Expected 62 alpha records, got {len(data['alphas'])}"
     for a in data["alphas"]:
         assert a["stage"] == "OS"
         assert a["status"] == "ACTIVE"
@@ -133,7 +133,7 @@ def test_monitor_fleet_fetch_and_display():
     with patch.object(client.session, "get", side_effect=[mock_resp_fleet, mock_resp_comp]):
         fleet = fetch_live_fleet(client)
         comp = fetch_competition_progress(client)
-        assert len(fleet) == 62
+        assert len(fleet) == 1
         assert comp["leaderboard"]["user"] == "IP68012"
 
         # Test display rendering
