@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 50,
+  "submitted_count": 51,
   "target_count": 50,
   "alphas": [
     {
@@ -1415,6 +1415,35 @@
         "margin": 0.001157,
         "pnl": 3764566,
         "selfCorrelation": 0.7378
+      }
+    },
+    {
+      "number": 51,
+      "id": "0mY7aldr",
+      "name": "CapEx Coverage (Operating Cash Flow / CapEx) + 10-Day MA Timing (TOP3000)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-02T02:53:05-05:00",
+      "expression": "0.60 * group_zscore(ts_rank(cashflow_op / (capex + 0.001 * cap), 126), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 10) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 6,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.75,
+        "fitness": 1.39,
+        "turnover": 0.1186,
+        "returns": 0.0786,
+        "drawdown": 0.0483,
+        "margin": 0.001326,
+        "pnl": 3891350,
+        "selfCorrelation": 0.7544
       }
     }
   ]
