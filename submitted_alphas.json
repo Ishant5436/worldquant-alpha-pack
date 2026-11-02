@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 59,
+  "submitted_count": 60,
   "target_count": 50,
   "alphas": [
     {
@@ -1675,6 +1675,35 @@
         "drawdown": 0.0442,
         "margin": 0.000974,
         "pnl": 4184248.0,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 60,
+      "id": "LLMdj172",
+      "name": "EBITDA Margin Decay 3 + 5D MA Timing (TOP500)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-02T16:09:34.538247+00:00",
+      "expression": "0.60 * group_zscore(ts_rank(ebitda / (sales + 0.001 * cap), 126), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP500",
+        "delay": 1,
+        "decay": 3,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.69,
+        "fitness": 1.09,
+        "turnover": 0.2073,
+        "returns": 0.0865,
+        "drawdown": 0.0486,
+        "margin": 0.000834,
+        "pnl": 4279082.0,
         "selfCorrelation": 0.0
       }
     }
