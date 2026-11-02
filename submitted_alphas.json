@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 55,
+  "submitted_count": 56,
   "target_count": 50,
   "alphas": [
     {
@@ -1560,6 +1560,35 @@
         "margin": 0.001662,
         "pnl": 5077908,
         "selfCorrelation": 0.6979
+      }
+    },
+    {
+      "number": 56,
+      "id": "vR1lXzm3",
+      "name": "Free Cash Flow to Enterprise Value + 5-Day MA Timing (TOP500)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-02T09:38:35-05:00",
+      "expression": "0.60 * group_zscore(ts_rank((cashflow_op - capex) / (enterprise_value + 0.001 * cap), 126), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP500",
+        "delay": 1,
+        "decay": 4,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.58,
+        "fitness": 1.07,
+        "turnover": 0.2008,
+        "returns": 0.0926,
+        "drawdown": 0.0777,
+        "margin": 0.000923,
+        "pnl": 4584279,
+        "selfCorrelation": 0.6966
       }
     }
   ]
