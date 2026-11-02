@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 54,
+  "submitted_count": 55,
   "target_count": 50,
   "alphas": [
     {
@@ -1531,6 +1531,35 @@
         "margin": 0.000987,
         "pnl": 4880511,
         "selfCorrelation": 0.6102
+      }
+    },
+    {
+      "number": 55,
+      "id": "QPvVAaWr",
+      "name": "Asymmetric 70/30 Quarterly EBITDA Low Yield + 3-Day MA Timing (TOP1000, INDUSTRY)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-02T09:30:06-05:00",
+      "expression": "0.70 * group_zscore(ts_rank(ts_backfill(anl4_fs_detail_estimate_1qf_v4_nd_ebitda_low, 10) / (cap + 0.001), 126), industry) + 0.30 * group_zscore(- (close / (ts_mean(close, 3) + 0.001) - 1.0), industry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP1000",
+        "delay": 1,
+        "decay": 5,
+        "neutralization": "INDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.42,
+        "fitness": 1.29,
+        "turnover": 0.1235,
+        "returns": 0.1026,
+        "drawdown": 0.0826,
+        "margin": 0.001662,
+        "pnl": 5077908,
+        "selfCorrelation": 0.6979
       }
     }
   ]
