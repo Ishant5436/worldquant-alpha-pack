@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 52,
+  "submitted_count": 53,
   "target_count": 50,
   "alphas": [
     {
@@ -1473,6 +1473,35 @@
         "margin": 0.00163,
         "pnl": 4745224,
         "selfCorrelation": 0.7291
+      }
+    },
+    {
+      "number": 53,
+      "id": "akKnx05w",
+      "name": "Conservative Floor Consensus Yield (Net Profit Low / Cap) + 5-Day MA Timing (TOP3000)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-02T07:49:14-05:00",
+      "expression": "0.60 * group_zscore(ts_rank(ts_backfill(anl4_fs_detail_estimates_advanced_af_nd_netprofit_low, 10) / (cap + 0.001), 126), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 4,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 2.58,
+        "fitness": 2.26,
+        "turnover": 0.156,
+        "returns": 0.119,
+        "drawdown": 0.0313,
+        "margin": 0.00153,
+        "pnl": 5911230,
+        "selfCorrelation": 0.69
       }
     }
   ]
