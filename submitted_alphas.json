@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 61,
+  "submitted_count": 62,
   "target_count": 50,
   "alphas": [
     {
@@ -1733,6 +1733,35 @@
         "drawdown": 0.0794,
         "margin": 0.000852,
         "pnl": 4051236.0,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 62,
+      "id": "E56egMe1",
+      "name": "SALES_TO_EV_TOP1000",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-02T18:18:28.000000+00:00",
+      "expression": "0.60 * group_zscore(ts_rank(sales / (enterprise_value + 0.001 * cap), 126), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP1000",
+        "delay": 1,
+        "decay": 4,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.45,
+        "fitness": 1.09,
+        "turnover": 0.2063,
+        "returns": 0.1165,
+        "drawdown": 0.0747,
+        "margin": 0.001129,
+        "pnl": 5764280.0,
         "selfCorrelation": 0.0
       }
     }
