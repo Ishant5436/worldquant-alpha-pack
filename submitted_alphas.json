@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 58,
+  "submitted_count": 59,
   "target_count": 50,
   "alphas": [
     {
@@ -1646,6 +1646,35 @@
         "drawdown": 0.0617,
         "margin": 0.00119,
         "pnl": 5847705.0,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 59,
+      "id": "E56eZOEm",
+      "name": "Cash Flow Return on Equity (CFO / Equity) + 5D MA Timing (TOP500)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-02T15:25:31.949349+00:00",
+      "expression": "0.60 * group_zscore(ts_rank(cashflow_op / (equity + 0.001 * cap), 126), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP500",
+        "delay": 1,
+        "decay": 4,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.65,
+        "fitness": 1.15,
+        "turnover": 0.1737,
+        "returns": 0.0846,
+        "drawdown": 0.0442,
+        "margin": 0.000974,
+        "pnl": 4184248.0,
         "selfCorrelation": 0.0
       }
     }
