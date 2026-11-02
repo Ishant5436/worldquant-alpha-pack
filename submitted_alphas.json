@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 53,
+  "submitted_count": 54,
   "target_count": 50,
   "alphas": [
     {
@@ -1502,6 +1502,35 @@
         "margin": 0.00153,
         "pnl": 5911230,
         "selfCorrelation": 0.69
+      }
+    },
+    {
+      "number": 54,
+      "id": "vR1lAOZQ",
+      "name": "Quarterly Forward EBITDA Low Yield + 5-Day MA Timing (TOP500)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-02T08:14:03-05:00",
+      "expression": "0.60 * group_zscore(ts_rank(ts_backfill(anl4_fs_detail_estimate_1qf_v4_nd_ebitda_low, 10) / (cap + 0.001), 126), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP500",
+        "delay": 1,
+        "decay": 4,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.59,
+        "fitness": 1.12,
+        "turnover": 0.1998,
+        "returns": 0.0986,
+        "drawdown": 0.0582,
+        "margin": 0.000987,
+        "pnl": 4880511,
+        "selfCorrelation": 0.6102
       }
     }
   ]
