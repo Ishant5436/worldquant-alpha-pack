@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 60,
+  "submitted_count": 61,
   "target_count": 50,
   "alphas": [
     {
@@ -1704,6 +1704,35 @@
         "drawdown": 0.0486,
         "margin": 0.000834,
         "pnl": 4279082.0,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 61,
+      "id": "O0Axax61",
+      "name": "Pretax Income Margin (Pretax Income / Sales) Decay 3 + 5D MA Timing (TOP500)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-02T16:40:01.521812+00:00",
+      "expression": "0.60 * group_zscore(ts_rank(pretax_income / (sales + 0.001 * cap), 126), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP500",
+        "delay": 1,
+        "decay": 3,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.57,
+        "fitness": 1.03,
+        "turnover": 0.1921,
+        "returns": 0.0819,
+        "drawdown": 0.0794,
+        "margin": 0.000852,
+        "pnl": 4051236.0,
         "selfCorrelation": 0.0
       }
     }
