@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 56,
+  "submitted_count": 57,
   "target_count": 50,
   "alphas": [
     {
@@ -1589,6 +1589,35 @@
         "margin": 0.000923,
         "pnl": 4584279,
         "selfCorrelation": 0.6966
+      }
+    },
+    {
+      "number": 57,
+      "id": "P0o3L1RW",
+      "name": "Operating Yield (Operating Income / Enterprise Value) + 3-Day MA Timing (TOP1000, INDUSTRY)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-02T09:49:46-05:00",
+      "expression": "0.70 * group_zscore(ts_rank(operating_income / (enterprise_value + 0.001 * cap), 126), industry) + 0.30 * group_zscore(- (close / (ts_mean(close, 3) + 0.001) - 1.0), industry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP1000",
+        "delay": 1,
+        "decay": 5,
+        "neutralization": "INDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.42,
+        "fitness": 1.2,
+        "turnover": 0.1195,
+        "returns": 0.0887,
+        "drawdown": 0.0614,
+        "margin": 0.001484,
+        "pnl": 4386859,
+        "selfCorrelation": 0.6973
       }
     }
   ]
