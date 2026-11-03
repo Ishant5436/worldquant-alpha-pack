@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 62,
+  "submitted_count": 63,
   "target_count": 50,
   "alphas": [
     {
@@ -1762,6 +1762,35 @@
         "drawdown": 0.0747,
         "margin": 0.001129,
         "pnl": 5764280.0,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 63,
+      "id": "kqNPkqAl",
+      "name": "INVENTORY_TURNOVER_TOP1000",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-03T03:47:09.000000+00:00",
+      "expression": "0.60 * group_zscore(ts_rank(cogs / (inventory + 0.001 * cap), 126), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP1000",
+        "delay": 1,
+        "decay": 4,
+        "neutralization": "SUBINDUSTRY",
+        "truncation": 0.08,
+        "unitHandling": "VERIFY"
+      },
+      "metrics": {
+        "sharpe": 1.61,
+        "fitness": 1.18,
+        "turnover": 0.1797,
+        "returns": 0.0965,
+        "drawdown": 0.0433,
+        "margin": 0.001074,
+        "pnl": 4774943.0,
         "selfCorrelation": 0.0
       }
     }
