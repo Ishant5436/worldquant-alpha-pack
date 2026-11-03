@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 64,
+  "submitted_count": 65,
   "target_count": 50,
   "alphas": [
     {
@@ -1816,6 +1816,30 @@
         "drawdown": 0.0683,
         "margin": 0.001169,
         "pnl": 5446234
+      }
+    },
+    {
+      "number": 65,
+      "id": "1YNxLKWz",
+      "name": "OPERATING_ROE_TOP1000",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-03",
+      "expression": "0.60 * group_zscore(ts_rank(operating_income / (equity + 0.001 * cap), 126), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 10) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "Universe": "TOP1000",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.96,
+        "fitness": 1.68,
+        "turnover": 0.1347,
+        "returns": 0.0989,
+        "drawdown": 0.0453,
+        "margin": 0.001469,
+        "pnl": 4895219
       }
     }
   ]
