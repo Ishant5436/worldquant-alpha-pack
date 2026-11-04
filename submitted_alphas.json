@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 72,
+  "submitted_count": 73,
   "target_count": 50,
   "alphas": [
     {
@@ -2008,6 +2008,30 @@
         "drawdown": 0.1218,
         "margin": 0.001079,
         "pnl": 5333308
+      }
+    },
+    {
+      "number": 73,
+      "id": "2rAm65ZY",
+      "name": "CASHFLOW_ROA_TOP200_D4",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-04",
+      "expression": "0.60 * group_zscore(ts_rank(cashflow_op / (assets + 0.001), 126), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "Universe": "TOP200",
+        "Decay": 4,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.64,
+        "fitness": 1.41,
+        "turnover": 0.1515,
+        "returns": 0.1112,
+        "drawdown": 0.0573,
+        "margin": 0.001468,
+        "pnl": 5500139
       }
     }
   ]
