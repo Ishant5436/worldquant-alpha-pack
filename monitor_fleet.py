@@ -49,15 +49,17 @@ def display_dashboard(fleet: List[Dict[str, Any]], comp: Dict[str, Any]) -> None
     assert isinstance(comp, dict), "Competition metadata must be a dict"
 
     lb = comp.get("leaderboard", {})
-    prog = comp.get("progress", {})
-    score_info = prog.get("score", {})
+    prog = comp.get("progress") or {}
+    score_info = prog.get("score") or {}
 
     print("\n" + "=" * 78)
     print("      WORLDQUANT BRAIN — GRANDMASTER FLEET MONITOR & OS AUDITOR")
     print("=" * 78)
     print(f"User: {lb.get('user', 'UNKNOWN')} | Platform Level: {lb.get('level', 'UNKNOWN')} | Rank: {lb.get('rank', 'N/A'):,}")
     print(f"Leaderboard Score: {lb.get('score', 0):,.1f} pts | Scored Alphas: {lb.get('alphas', 0)}")
-    print(f"Target Level: {prog.get('level', 'GOLD')} | Remaining to Next Level: {score_info.get('remaining', 0):,.1f} pts")
+    target_lvl = prog.get("level", "MAX LEVEL (GOLD)")
+    rem_pts = score_info.get("remaining", 0.0)
+    print(f"Target Level: {target_lvl} | Remaining to Next Level: {rem_pts:,.1f} pts")
     print("-" * 78)
     print(f"Total Out-of-Sample (OS) Alphas: {len(fleet)} / 50 (100.0% Grandmaster Milestone)")
 

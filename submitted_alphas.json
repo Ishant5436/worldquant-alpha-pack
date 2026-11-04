@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 68,
+  "submitted_count": 69,
   "target_count": 50,
   "alphas": [
     {
@@ -1912,6 +1912,30 @@
         "drawdown": 0.0985,
         "margin": 0.00141,
         "pnl": 5710645
+      }
+    },
+    {
+      "number": 69,
+      "id": "ZYQblaAn",
+      "name": "OPERATING_ROE_BOLLINGER_TOP1000",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-04",
+      "expression": "0.60 * group_zscore(ts_rank(operating_income / (equity + 0.001 * cap), 126), subindustry) - 0.40 * group_zscore((close - ts_mean(close, 10)) / (ts_std_dev(close, 10) + 0.001), subindustry)",
+      "settings": {
+        "Universe": "TOP1000",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 2.24,
+        "fitness": 1.61,
+        "turnover": 0.2084,
+        "returns": 0.1079,
+        "drawdown": 0.0447,
+        "margin": 0.001035,
+        "pnl": 5338707
       }
     }
   ]
