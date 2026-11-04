@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 70,
+  "submitted_count": 71,
   "target_count": 50,
   "alphas": [
     {
@@ -1960,6 +1960,30 @@
         "drawdown": 0.0825,
         "margin": 0.001024,
         "pnl": 6236714
+      }
+    },
+    {
+      "number": 71,
+      "id": "MPY3qj36",
+      "name": "OPERATING_YIELD_BOLLINGER_TOP500_15D",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-04",
+      "expression": "0.60 * group_zscore(ts_rank(operating_income / (cap + 0.001), 126), subindustry) - 0.40 * group_zscore((close - ts_mean(close, 15)) / (ts_std_dev(close, 15) + 0.001), subindustry)",
+      "settings": {
+        "Universe": "TOP500",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.54,
+        "fitness": 1.01,
+        "turnover": 0.2051,
+        "returns": 0.0879,
+        "drawdown": 0.0729,
+        "margin": 0.000857,
+        "pnl": 4348402
       }
     }
   ]
