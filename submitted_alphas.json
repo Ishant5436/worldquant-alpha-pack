@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 73,
+  "submitted_count": 74,
   "target_count": 50,
   "alphas": [
     {
@@ -2032,6 +2032,30 @@
         "drawdown": 0.0573,
         "margin": 0.001468,
         "pnl": 5500139
+      }
+    },
+    {
+      "number": 74,
+      "id": "QPvKAl8r",
+      "name": "GROSS_PROFIT_ASSETS_TOP200_D5",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-04",
+      "expression": "0.60 * group_zscore(ts_rank((sales - cogs) / (assets + 0.001 * cap), 126), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "Universe": "TOP200",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.38,
+        "fitness": 1.02,
+        "turnover": 0.1874,
+        "returns": 0.1025,
+        "drawdown": 0.0775,
+        "margin": 0.001093,
+        "pnl": 5069500
       }
     }
   ]
