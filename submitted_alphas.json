@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 66,
+  "submitted_count": 67,
   "target_count": 50,
   "alphas": [
     {
@@ -1864,6 +1864,30 @@
         "drawdown": 0.074,
         "margin": 0.001097,
         "pnl": 5651101
+      }
+    },
+    {
+      "number": 67,
+      "id": "Jjex22wj",
+      "name": "PRETAX_MARGIN_TOP200_DECAY4",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-04",
+      "expression": "0.60 * group_zscore(ts_rank(pretax_income / (sales + 0.001 * cap), 126), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "Universe": "TOP200",
+        "Decay": 4,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.59,
+        "fitness": 1.22,
+        "turnover": 0.19,
+        "returns": 0.1125,
+        "drawdown": 0.0837,
+        "margin": 0.001184,
+        "pnl": 5564799
       }
     }
   ]
