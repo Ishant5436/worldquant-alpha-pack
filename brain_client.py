@@ -97,22 +97,25 @@ class BrainAPIClient:
         self.is_authenticated = False
         self.session = _BrainSession()
 
-    def authenticate(self) -> bool:
+    def authenticate(self, retries: int = 3) -> bool:
         """Authenticates with BRAIN API endpoint via HTTP Basic Auth."""
         assert isinstance(self.is_configured, bool), "Configuration state invariant violated"
+        assert retries >= 1, "Retries must be positive"
         if not self.is_configured:
             return False
 
         url = f"{BASE_URL}/authentication"
-        try:
-            resp = self.session.post(url, auth=(self.email, self.password), timeout=10)
-            status_code = getattr(resp, "status", getattr(resp, "status_code", 200))
-            if status_code in [200, 201]:
-                self.is_authenticated = True
-                return True
-            return False
-        except Exception:
-            return False
+        for attempt in range(retries):
+            try:
+                resp = self.session.post(url, auth=(self.email, self.password), timeout=25)
+                status_code = getattr(resp, "status", getattr(resp, "status_code", 200))
+                if status_code in [200, 201]:
+                    self.is_authenticated = True
+                    return True
+            except Exception:
+                if attempt < retries - 1:
+                    time.sleep(2 * (attempt + 1))
+        return False
 
     def dispatch_simulation(self, alpha_spec: Dict[str, Any]) -> Optional[str]:
         """Dispatches an alpha expression to WorldQuant BRAIN simulation cluster."""

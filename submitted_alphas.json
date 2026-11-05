@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 82,
+  "submitted_count": 83,
   "target_count": 50,
   "alphas": [
     {
@@ -2255,6 +2255,31 @@
         "margin": 0.001217,
         "pnl": 5668875,
         "selfCorrelation": 0.5432
+      }
+    },
+    {
+      "number": 83,
+      "id": "j2YagdvO",
+      "name": "OCF_TO_EV_TOP200_D5_252",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-05T10:09:40-05:00",
+      "expression": "0.60 * group_zscore(ts_rank(cashflow_op / (enterprise_value + 0.001 * cap), 252), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "Universe": "TOP200",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.41,
+        "fitness": 1.09,
+        "turnover": 0.1877,
+        "returns": 0.1123,
+        "drawdown": 0.0713,
+        "margin": 0.001197,
+        "pnl": 5556061,
+        "selfCorrelation": 0.6939
       }
     }
   ]
