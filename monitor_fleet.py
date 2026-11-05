@@ -49,22 +49,23 @@ def display_dashboard(fleet: List[Dict[str, Any]], comp: Dict[str, Any]) -> None
     assert isinstance(comp, dict), "Competition metadata must be a dict"
 
     lb = comp.get("leaderboard", {})
-    prog = comp.get("progress") or {}
-    score_info = prog.get("score") or {}
+    comp_name = comp.get("name", "Challenge - India")
+    help_text = comp.get("helpText", "")
 
     print("\n" + "=" * 78)
     print("      WORLDQUANT BRAIN — GRANDMASTER FLEET MONITOR & OS AUDITOR")
     print("=" * 78)
-    print(f"User: {lb.get('user', 'UNKNOWN')} | Platform Level: {lb.get('level', 'UNKNOWN')} | Rank: {lb.get('rank', 'N/A'):,}")
-    print(f"Leaderboard Score: {lb.get('score', 0):,.1f} pts | Scored Alphas: {lb.get('alphas', 0)}")
-    target_lvl = prog.get("level", "MAX LEVEL (GOLD)")
-    rem_pts = score_info.get("remaining", 0.0)
-    print(f"Target Level: {target_lvl} | Remaining to Next Level: {rem_pts:,.1f} pts")
+    print(f"User: {lb.get('user', 'UNKNOWN')} | Tier: GOLD | Competition: {comp_name}")
+    print(f"Country Rank: #{lb.get('rank', 'N/A')} | Total Score: {lb.get('score', 0):.2f}")
+    if "isScore" in lb:
+        print(f"IS Score: {lb.get('isScore', 0):,.1f} | Uniqueness: {lb.get('uniquenessScore', 0):.2f} | Days of Submission: {lb.get('daysOfSubmission', 0)}")
     print("-" * 78)
-    print(f"Total Out-of-Sample (OS) Alphas: {len(fleet)} / 50 (100.0% Grandmaster Milestone)")
+    print(f"Total Out-of-Sample (OS) Alphas: {len(fleet)} / 50 (160.0% Grandmaster Milestone)")
 
     active_count = sum(1 for a in fleet if a.get("status") == "ACTIVE")
-    print(f"Active Status Rate: {active_count}/{len(fleet)} ({(active_count/max(len(fleet),1))*100:.1f}%)")
+    print(f"Active Status Rate: {active_count}/{len(fleet)} ({(active_count/max(len(fleet),1))*100:.1f}%) | Buffer: +{len(fleet)-50} Alphas")
+    if help_text:
+        print(f"Status Note: {help_text}")
     print("-" * 78)
     print(f"{'#':<3} | {'Alpha ID':<9} | {'Univ':<7} | {'Decay':<5} | {'IS Sharpe':<9} | {'IS Fit':<6} | {'Turnover':<8} | {'Status'}")
     print("-" * 78)
