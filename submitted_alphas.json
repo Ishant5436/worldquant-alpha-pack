@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 77,
+  "submitted_count": 78,
   "target_count": 50,
   "alphas": [
     {
@@ -2130,6 +2130,31 @@
         "margin": 0.001243,
         "pnl": 4445774,
         "selfCorrelation": 0.4832
+      }
+    },
+    {
+      "number": 78,
+      "id": "YP116dWJ",
+      "name": "INVENTORY_TURNOVER_TOP200_D5_252",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-05T01:04:17-05:00",
+      "expression": "0.60 * group_zscore(ts_rank(cogs / (inventory + 0.001 * cap), 252), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "Universe": "TOP200",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.34,
+        "fitness": 1.02,
+        "turnover": 0.1731,
+        "returns": 0.1011,
+        "drawdown": 0.1011,
+        "margin": 0.001168,
+        "pnl": 5002508,
+        "selfCorrelation": 0.5724
       }
     }
   ]
