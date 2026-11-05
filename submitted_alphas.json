@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 78,
+  "submitted_count": 79,
   "target_count": 50,
   "alphas": [
     {
@@ -2155,6 +2155,31 @@
         "margin": 0.001168,
         "pnl": 5002508,
         "selfCorrelation": 0.5724
+      }
+    },
+    {
+      "number": 79,
+      "id": "akKK6wp5",
+      "name": "CASHFLOW_DEBT_TOP500_D5_252",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-05T01:10:01-05:00",
+      "expression": "0.60 * group_zscore(ts_rank(cashflow_op / (debt_lt + debt_st + 0.001 * cap), 252), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "Universe": "TOP500",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.51,
+        "fitness": 1.11,
+        "turnover": 0.1438,
+        "returns": 0.0774,
+        "drawdown": 0.0634,
+        "margin": 0.001077,
+        "pnl": 3832100,
+        "selfCorrelation": 0.5925
       }
     }
   ]
