@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 75,
+  "submitted_count": 76,
   "target_count": 50,
   "alphas": [
     {
@@ -2080,6 +2080,31 @@
         "drawdown": 0.0574,
         "margin": 0.001333,
         "pnl": 6519474
+      }
+    },
+    {
+      "number": 76,
+      "id": "9qxE20O2",
+      "name": "FCF_ROIC_70_30_TOP200_D5",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-04T23:14:28-05:00",
+      "expression": "0.70 * group_zscore(ts_rank((cashflow_op - capex) / (debt_lt + equity + 0.001 * cap), 126), subindustry) + 0.30 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "Universe": "TOP200",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.45,
+        "fitness": 1.15,
+        "turnover": 0.1485,
+        "returns": 0.093,
+        "drawdown": 0.0685,
+        "margin": 0.001253,
+        "pnl": 4601736,
+        "selfCorrelation": 0.6579
       }
     }
   ]
