@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 76,
+  "submitted_count": 77,
   "target_count": 50,
   "alphas": [
     {
@@ -2105,6 +2105,31 @@
         "margin": 0.001253,
         "pnl": 4601736,
         "selfCorrelation": 0.6579
+      }
+    },
+    {
+      "number": 77,
+      "id": "qMLLKvAV",
+      "name": "FX_TRANS_ASSETS_TOP200_D5_252",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-05T00:38:54-05:00",
+      "expression": "0.60 * group_zscore(ts_rank(fn_oth_income_loss_fx_transaction_and_tax_translation_adj_a / (assets + 0.001 * cap), 252), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "Universe": "TOP200",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.28,
+        "fitness": 1.01,
+        "turnover": 0.1446,
+        "returns": 0.0898,
+        "drawdown": 0.0888,
+        "margin": 0.001243,
+        "pnl": 4445774,
+        "selfCorrelation": 0.4832
       }
     }
   ]
