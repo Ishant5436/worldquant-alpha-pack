@@ -1,3 +1,8 @@
 __pycache__/
 *.pyc
 .pytest_cache/
+dispatch_*.py
+wave*.json
+submit_*.py
+*.log
+*.env

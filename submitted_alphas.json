@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 83,
+  "submitted_count": 85,
   "target_count": 50,
   "alphas": [
     {
@@ -2280,6 +2280,53 @@
         "margin": 0.001197,
         "pnl": 5556061,
         "selfCorrelation": 0.6939
+      }
+    },
+    {
+      "number": 84,
+      "id": "gJea8RgQ",
+      "name": "OPERATING_EV_TOP200_D5_252",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-05T10:46:49-05:00",
+      "expression": "0.60 * group_zscore(ts_rank(operating_income / (enterprise_value + 0.001 * cap), 252), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "Universe": "TOP200",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.7,
+        "fitness": 1.44,
+        "turnover": 0.183,
+        "margin": 0.00144,
+        "pnl": 6520837
+      }
+    },
+    {
+      "number": 85,
+      "id": "A1Vx8z6g",
+      "name": "CASHFLOW_DEBT_TOP200_D5_252",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-06",
+      "expression": "0.60 * group_zscore(ts_rank(cashflow_op / (debt + 0.001 * cap), 252), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "Universe": "TOP200",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.4,
+        "fitness": 1.07,
+        "turnover": 0.162,
+        "returns": 0.0951,
+        "drawdown": 0.0892,
+        "margin": 0.001174,
+        "pnl": 4705434,
+        "selfCorrelation": 0.6367
       }
     }
   ]
