@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 81,
+  "submitted_count": 82,
   "target_count": 50,
   "alphas": [
     {
@@ -2230,6 +2230,31 @@
         "margin": 0.001239,
         "pnl": 5136299,
         "selfCorrelation": 0.6555
+      }
+    },
+    {
+      "number": 82,
+      "id": "MPY6mNVk",
+      "name": "EBITDA_TO_EV_TOP200_D5_252",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-05T08:17:28-05:00",
+      "expression": "0.60 * group_zscore(ts_rank(ebitda / (enterprise_value + 0.001 * cap), 252), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "Universe": "TOP200",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.38,
+        "fitness": 1.08,
+        "turnover": 0.1883,
+        "returns": 0.1146,
+        "drawdown": 0.1006,
+        "margin": 0.001217,
+        "pnl": 5668875,
+        "selfCorrelation": 0.5432
       }
     }
   ]
