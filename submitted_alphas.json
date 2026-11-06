@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 101,
+  "submitted_count": 102,
   "target_count": 50,
   "alphas": [
     {
@@ -2720,6 +2720,30 @@
         "returns": 0.063,
         "drawdown": 0.0372,
         "self_correlation": 0.687
+      },
+      "settings": {
+        "Universe": "TOP1000",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      }
+    },
+    {
+      "id": "qMLG80gZ",
+      "name": "FORWARD_EBIT_MEAN_WEIGHT80_TOP1000_80_20_D5",
+      "expression": "0.80 * group_zscore(ts_rank(anl4_fs_detail_estimates_advanced_af_nd_ebit_mean / (enterprise_value + 0.001 * cap), 252), subindustry) + 0.20 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "submitted_at": "2026-11-06T15:46:32-05:00",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "metrics": {
+        "sharpe": 2.08,
+        "fitness": 1.9,
+        "turnover": 0.1236,
+        "margin": 0.001696,
+        "pnl": 5183541,
+        "returns": 0.1048,
+        "drawdown": 0.0448,
+        "self_correlation": 0.7576
       },
       "settings": {
         "Universe": "TOP1000",
