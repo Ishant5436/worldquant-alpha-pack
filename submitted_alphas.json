@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 89,
+  "submitted_count": 90,
   "target_count": 50,
   "alphas": [
     {
@@ -2427,6 +2427,31 @@
         "margin": 0.001195,
         "pnl": 2873326,
         "selfCorrelation": 0.6119
+      }
+    },
+    {
+      "number": 90,
+      "id": "pwdWGol3",
+      "name": "ANALYST_FCF_EQ_TOP1000_252_D5",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-06",
+      "expression": "0.60 * group_zscore(ts_rank(ts_backfill(anl4_fs_detail_estimates_advanced_af_nd_fcf_mean, 10) / (equity + 0.001 * cap), 252), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "Universe": "TOP1000",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.9,
+        "fitness": 1.5,
+        "turnover": 0.1334,
+        "returns": 0.0835,
+        "drawdown": 0.0344,
+        "margin": 0.001251,
+        "pnl": 4131479,
+        "selfCorrelation": 0.0
       }
     }
   ],
