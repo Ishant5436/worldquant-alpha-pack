@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 97,
+  "submitted_count": 99,
   "target_count": 50,
   "alphas": [
     {
@@ -2627,6 +2627,56 @@
         "margin": 0.002171,
         "pnl": 6336483,
         "selfCorrelation": 0.6957
+      }
+    },
+    {
+      "number": 98,
+      "id": "e75VJZeN",
+      "name": "ANALYST_EBIT_MEAN_EV_TOP200_80_20_20D_D5",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-06",
+      "expression": "0.80 * group_zscore(ts_rank(ts_backfill(anl4_fs_detail_estimates_advanced_af_nd_ebit_mean, 10) / (enterprise_value + 0.001 * cap), 252), subindustry) + 0.20 * group_zscore(- (close / (ts_mean(close, 20) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "Universe": "TOP200",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.26,
+        "fitness": 1.0,
+        "turnover": 0.1512,
+        "returns": 0.0945,
+        "drawdown": 0.0866,
+        "margin": 0.001251,
+        "pnl": 4678271,
+        "selfCorrelation": 0.568
+      }
+    },
+    {
+      "number": 99,
+      "id": "rKRNkGZo",
+      "name": "INTEREST_COVERAGE_TOP1000_80_20_20D_D5",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-06",
+      "expression": "0.80 * group_zscore(ts_rank(operating_income / (interest_expense + 0.001 * cap), 252), subindustry) + 0.20 * group_zscore(- (close / (ts_mean(close, 20) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "Universe": "TOP1000",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.61,
+        "fitness": 1.24,
+        "turnover": 0.0947,
+        "returns": 0.0743,
+        "drawdown": 0.0666,
+        "margin": 0.00157,
+        "pnl": 3676602,
+        "selfCorrelation": 0.7129
       }
     }
   ],
