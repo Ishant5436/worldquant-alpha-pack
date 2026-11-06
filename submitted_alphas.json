@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 96,
+  "submitted_count": 97,
   "target_count": 50,
   "alphas": [
     {
@@ -2602,6 +2602,31 @@
         "margin": 0.001284,
         "pnl": 4109718,
         "selfCorrelation": 0.6832
+      }
+    },
+    {
+      "number": 97,
+      "id": "1YNlblrK",
+      "name": "INTEREST_COVERAGE_TOP200_80_20_20D_D5",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-06",
+      "expression": "0.80 * group_zscore(ts_rank(operating_income / (interest_expense + 0.001 * cap), 252), subindustry) + 0.20 * group_zscore(- (close / (ts_mean(close, 20) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "Universe": "TOP200",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.83,
+        "fitness": 1.85,
+        "turnover": 0.118,
+        "returns": 0.1281,
+        "drawdown": 0.056,
+        "margin": 0.002171,
+        "pnl": 6336483,
+        "selfCorrelation": 0.6957
       }
     }
   ],
