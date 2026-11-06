@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 103,
+  "submitted_count": 104,
   "target_count": 50,
   "alphas": [
     {
@@ -2775,16 +2775,40 @@
         "Neutralization": "SUBINDUSTRY",
         "Truncation": 0.08
       }
+    },
+    {
+      "id": "9qxMoq82",
+      "name": "OPERATING_INCOME_YIELD_252D_DECAY5_TOP1000",
+      "expression": "0.80 * group_zscore(ts_rank(ts_backfill(operating_income, 20) / cap, 252), subindustry) + 0.20 * group_zscore(- (close / ts_mean(close, 10) - 1.0), subindustry)",
+      "submitted_at": "2026-11-06T17:01:45-05:00",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "metrics": {
+        "sharpe": 2.17,
+        "fitness": 1.89,
+        "turnover": 0.1235,
+        "margin": 0.001535,
+        "pnl": 4692059,
+        "returns": 0.0945,
+        "drawdown": 0.0435,
+        "self_correlation": 0.691
+      },
+      "settings": {
+        "Universe": "TOP1000",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      }
     }
   ],
-  "last_updated": "2026-11-06",
+  "last_updated": "2026-11-06T17:05:00-05:00",
   "portfolio_summary": {
-    "total_active_os": 101,
-    "cumulative_is_pnl": 490484922.0,
-    "average_sharpe": 1.69,
-    "average_fitness": 1.27,
-    "average_turnover": 0.169,
-    "average_margin_bps": 12.1,
+    "total_alphas": 104,
+    "cumulative_is_pnl": 504671684.0,
+    "mean_sharpe": 1.6934,
+    "mean_fitness": 1.2816,
+    "mean_turnover": 0.1675,
+    "mean_margin": 0.001255,
     "survival_rate": 1.0
   }
 }

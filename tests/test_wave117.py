@@ -51,7 +51,7 @@ def test_alpha_103_admitted_in_fleet():
     path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "submitted_alphas.json")
     with open(path) as f:
         data = json.load(f)
-    assert data["submitted_count"] == 103
+    assert data["submitted_count"] >= 103
     alpha_103 = next((a for a in data["alphas"] if a["id"] == "P0ozdMwx"), None)
     assert alpha_103 is not None, "Alpha P0ozdMwx not found in fleet"
     assert alpha_103["stage"] == "OS"
