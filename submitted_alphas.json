@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 90,
+  "submitted_count": 91,
   "target_count": 50,
   "alphas": [
     {
@@ -2452,6 +2452,31 @@
         "margin": 0.001251,
         "pnl": 4131479,
         "selfCorrelation": 0.0
+      }
+    },
+    {
+      "number": 91,
+      "id": "vR1YP0wr",
+      "name": "INV_CAP_TURNOVER_TOP1000_252_D5",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-06",
+      "expression": "0.60 * group_zscore(ts_rank(sales / (invested_capital + 0.001 * cap), 252), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "Universe": "TOP1000",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.4,
+        "fitness": 1.03,
+        "turnover": 0.1338,
+        "returns": 0.073,
+        "drawdown": 0.0989,
+        "margin": 0.001092,
+        "pnl": 3613015,
+        "selfCorrelation": 0.6943
       }
     }
   ],
