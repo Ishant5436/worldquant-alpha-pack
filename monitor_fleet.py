@@ -21,13 +21,20 @@ def fetch_live_fleet(client: BrainAPIClient) -> List[Dict[str, Any]]:
     assert client.is_authenticated, "Authentication invariant failed"
     assert client.session is not None, "Session invariant failed"
 
-    url = "https://api.worldquantbrain.com/users/self/alphas?stage=OS&limit=100"
-    resp = client.session.get(url, timeout=20)
-    assert resp.status == 200, f"HTTP Error {resp.status}"
-
-    data = json.loads(resp.read().decode("utf-8"))
-    assert "results" in data, "Malformed API payload"
-    return data.get("results", [])
+    alphas: List[Dict[str, Any]] = []
+    offset = 0
+    limit = 100
+    for _ in range(10):
+        url = f"https://api.worldquantbrain.com/users/self/alphas?stage=OS&limit={limit}&offset={offset}"
+        resp = client.session.get(url, timeout=20)
+        assert resp.status == 200, f"HTTP Error {resp.status}"
+        data = json.loads(resp.read().decode("utf-8"))
+        results = data.get("results", [])
+        alphas.extend(results)
+        if len(results) < limit or len(alphas) >= data.get("count", 0):
+            break
+        offset += limit
+    return alphas
 
 def fetch_competition_progress(client: BrainAPIClient) -> Dict[str, Any]:
     """Fetches user competition progress and leaderboard standing."""

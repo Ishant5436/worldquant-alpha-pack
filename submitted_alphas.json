@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 100,
+  "submitted_count": 101,
   "target_count": 50,
   "alphas": [
     {
@@ -2703,7 +2703,40 @@
         "pnl": 4967745,
         "selfCorrelation": 0.7035
       }
+    },
+    {
+      "id": "1YNl8ldz",
+      "name": "EQUITY_TURNOVER_TOP1000_70_30_10D_D5",
+      "expression": "0.70 * group_zscore(ts_rank(sales / (equity + 0.001 * cap), 252), subindustry) + 0.30 * group_zscore(- (close / (ts_mean(close, 10) + 0.001) - 1.0), subindustry)",
+      "submitted_at": "2026-11-06T14:38:09-05:00",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "metrics": {
+        "sharpe": 1.44,
+        "fitness": 1.02,
+        "turnover": 0.1002,
+        "margin": 0.001258,
+        "pnl": 3116829,
+        "returns": 0.063,
+        "drawdown": 0.0372,
+        "self_correlation": 0.687
+      },
+      "settings": {
+        "Universe": "TOP1000",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      }
     }
   ],
-  "last_updated": "2026-11-06"
+  "last_updated": "2026-11-06",
+  "portfolio_summary": {
+    "total_active_os": 101,
+    "cumulative_is_pnl": 490484922.0,
+    "average_sharpe": 1.69,
+    "average_fitness": 1.27,
+    "average_turnover": 0.169,
+    "average_margin_bps": 12.1,
+    "survival_rate": 1.0
+  }
 }
