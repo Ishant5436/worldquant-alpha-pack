@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 91,
+  "submitted_count": 92,
   "target_count": 50,
   "alphas": [
     {
@@ -2477,6 +2477,31 @@
         "margin": 0.001092,
         "pnl": 3613015,
         "selfCorrelation": 0.6943
+      }
+    },
+    {
+      "number": 92,
+      "id": "mLodw7Vp",
+      "name": "CF_ROIC_TOP1000_252_D5",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-06",
+      "expression": "0.60 * group_zscore(ts_rank(cashflow_op / (invested_capital + 0.001 * cap), 252), subindustry) + 0.40 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "Universe": "TOP1000",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.85,
+        "fitness": 1.47,
+        "turnover": 0.126,
+        "returns": 0.0793,
+        "drawdown": 0.0414,
+        "margin": 0.001259,
+        "pnl": 3925710,
+        "selfCorrelation": 0.8371
       }
     }
   ],
