@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 102,
+  "submitted_count": 103,
   "target_count": 50,
   "alphas": [
     {
@@ -2744,6 +2744,30 @@
         "returns": 0.1048,
         "drawdown": 0.0448,
         "self_correlation": 0.7576
+      },
+      "settings": {
+        "Universe": "TOP1000",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      }
+    },
+    {
+      "id": "P0ozdMwx",
+      "name": "FORWARD_FCFPS_YIELD_TOP1000_75_25_D5",
+      "expression": "0.75 * group_zscore(ts_rank(ts_backfill(anl4_fs_detail_estimates_advanced_af_nd_fcfps_mean, 10) / (close + 0.001), 252), subindustry) + 0.25 * group_zscore(- (close / (ts_mean(close, 5) + 0.001) - 1.0), subindustry)",
+      "submitted_at": "2026-11-06T16:30:14-05:00",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "metrics": {
+        "sharpe": 1.65,
+        "fitness": 1.38,
+        "turnover": 0.1186,
+        "margin": 0.001469,
+        "pnl": 4311162,
+        "returns": 0.0871,
+        "drawdown": 0.0445,
+        "self_correlation": 0.7205
       },
       "settings": {
         "Universe": "TOP1000",
