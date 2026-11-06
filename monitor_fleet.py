@@ -60,7 +60,8 @@ def display_dashboard(fleet: List[Dict[str, Any]], comp: Dict[str, Any]) -> None
     if "isScore" in lb:
         print(f"IS Score: {lb.get('isScore', 0):,.1f} | Uniqueness: {lb.get('uniquenessScore', 0):.2f} | Days of Submission: {lb.get('daysOfSubmission', 0)}")
     print("-" * 78)
-    print(f"Total Out-of-Sample (OS) Alphas: {len(fleet)} / 50 (160.0% Grandmaster Milestone)")
+    pct = (len(fleet) / 50.0) * 100.0
+    print(f"Total Out-of-Sample (OS) Alphas: {len(fleet)} / 50 ({pct:.1f}% Grandmaster Milestone)")
 
     active_count = sum(1 for a in fleet if a.get("status") == "ACTIVE")
     print(f"Active Status Rate: {active_count}/{len(fleet)} ({(active_count/max(len(fleet),1))*100:.1f}%) | Buffer: +{len(fleet)-50} Alphas")
