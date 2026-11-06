@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 95,
+  "submitted_count": 96,
   "target_count": 50,
   "alphas": [
     {
@@ -2577,6 +2577,31 @@
         "margin": 0.00139,
         "pnl": 4194195,
         "selfCorrelation": 0.6913
+      }
+    },
+    {
+      "number": 96,
+      "id": "pwdMmzvj",
+      "name": "ANALYST_EPS_MEAN_TOP500_70_30_15D_D5",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-06",
+      "expression": "0.70 * group_zscore(ts_rank(ts_backfill(anl4_fs_detail_estimates_basic_af_v4_nd_eps_mean, 10) / (close + 0.001), 252), subindustry) + 0.30 * group_zscore(- (close / (ts_mean(close, 15) + 0.001) - 1.0), subindustry)",
+      "settings": {
+        "Universe": "TOP500",
+        "Decay": 5,
+        "Neutralization": "SUBINDUSTRY",
+        "Truncation": 0.08
+      },
+      "metrics": {
+        "sharpe": 1.35,
+        "fitness": 1.08,
+        "turnover": 0.1294,
+        "returns": 0.0831,
+        "drawdown": 0.0692,
+        "margin": 0.001284,
+        "pnl": 4109718,
+        "selfCorrelation": 0.6832
       }
     }
   ],

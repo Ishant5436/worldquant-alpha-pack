@@ -3,6 +3,7 @@ __pycache__/
 .pytest_cache/
 dispatch_*.py
 evaluate_*.py
+poll_and_evaluate_*.py
 wave*.json
 submit_*.py
 *.log
