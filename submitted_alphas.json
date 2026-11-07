@@ -1,7 +1,7 @@
 {
   "account": "IP68012",
   "competition": "challenge",
-  "submitted_count": 104,
+  "submitted_count": 106,
   "target_count": 50,
   "alphas": [
     {
@@ -2798,6 +2798,40 @@
         "Decay": 5,
         "Neutralization": "SUBINDUSTRY",
         "Truncation": 0.08
+      }
+    },
+    {
+      "id": "mLo7nn9X",
+      "name": "OPERATING_MARGIN_TOP200_252D_10D_D5",
+      "expression": "0.75 * group_zscore(ts_rank(operating_income / (sales + 0.001 * cap), 252), subindustry) + 0.25 * group_zscore(- (close / (ts_mean(close, 10) + 0.001 * close) - 1.0), subindustry)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-07 06:06:44 UTC",
+      "metrics": {
+        "sharpe": 1.42,
+        "fitness": 1.21,
+        "turnover": 0.1386,
+        "margin": 0.001445,
+        "pnl": 4956291,
+        "selfCorrelation": 0.0
+      }
+    },
+    {
+      "id": "e75vAJlg",
+      "name": "FORWARD_PTPR_EV_TOP1000_80_20_5D_D6",
+      "expression": "0.80 * group_zscore(ts_rank(anl4_fs_detail_estimates_advanced_af_nd_ptpr_mean / (enterprise_value + 0.001 * cap), 252), subindustry) + 0.20 * group_zscore(- (close / (ts_mean(close, 5) + 0.001 * close) - 1.0), subindustry)",
+      "stage": "OS",
+      "status": "ACTIVE",
+      "date_submitted": "2026-11-07 07:52:02 UTC",
+      "metrics": {
+        "sharpe": 1.51,
+        "fitness": 1.11,
+        "turnover": 0.1355,
+        "margin": 0.001088,
+        "pnl": 3649360,
+        "returns": 0.0738,
+        "drawdown": 0.0567,
+        "selfCorrelation": 0.6208
       }
     }
   ],
